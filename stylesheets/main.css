@@ -1,0 +1,31 @@
+.list-officials {
+    display: flex;
+    /* align-items: center; */
+    flex-wrap: wrap;
+}
+
+.official-box {
+    background-color: #333;
+    color: whitesmoke;
+    border: 1px solid red;
+    padding: 15px;
+    flex: 0 0 20%;/*auto;*/
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.official-imageUrl {
+    align-self: center;
+    padding-bottom: 15px;
+}
+
+.official-image {
+    max-width: 200px;
+    border-radius: 50%;
+}
+
+.no-official-image {
+    max-width: 200px;
+}
