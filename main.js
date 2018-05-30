@@ -153,7 +153,12 @@ function appendTitle(currentOfficial, text) {
 function appendParty(currentOfficial, text) {
     var $newDiv = $("<div>");
     $newDiv.attr("data-party", "");
-    $newDiv.text(text);
+
+    if (text === "Unknown") {
+        $newDiv.text("Party: " + text);
+    } else  {
+        $newDiv.text(text);
+    }
     currentOfficial.append($newDiv);
 }
 
