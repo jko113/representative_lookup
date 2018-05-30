@@ -16,6 +16,14 @@
     border-radius: 10px;
 }
 
+.official-box a:link {
+    color: darkorange;
+}
+
+.official-box a:visited {
+    color: darkorange;
+}
+
 .official-imageUrl {
     align-self: center;
     padding-bottom: 15px;
@@ -28,4 +36,8 @@
 
 .no-official-image {
     max-width: 200px;
+}
+
+.hidden {
+    display: none;
 }

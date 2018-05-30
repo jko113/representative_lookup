@@ -96,9 +96,14 @@ function getOfficials () {
         prependPhoto($currentOfficial, official);
 
         // append Twitter Handle
-        var twitterHandle = getTwitterHandle($currentOfficial, official.channels);
-        // console.log(official.channels);
-        appendTwitterHandle($currentOfficial, twitterHandle);
+        // var twitterHandle = getTwitterHandle($currentOfficial, official.channels);
+        // // console.log(official.channels);
+        // appendTwitterHandle($currentOfficial, twitterHandle);
+
+        // append social media channels
+        if (official.channels) {
+            appendSocialMedia($currentOfficial, official.channels, officialIndex);
+        }
 
         // append article search
         appendArticleSearch($currentOfficial, officialIndex);
@@ -153,11 +158,30 @@ function appendParty(currentOfficial, text) {
 }
 
 function appendTwitterHandle(currentOfficial, handle) {
-    console.log(handle);
+    //console.log(handle);
     var $newDiv = $("<div>");
     $newDiv.attr("data-twitter", "");
     $newDiv.text(handle);
     currentOfficial.append($newDiv);
+}
+
+function appendSocialMedia(currentOfficial, channels, index) {
+    var $socialContainer = $("<div>");
+    $socialContainer.attr("data-social-" + index, "");
+    $socialContainer.text("Social Media");
+    
+    var $socialContents = $("<div>");
+    $socialContents.addClass("hidden");
+
+    channels.forEach(function(channel) {
+        var $newChannel = $("<div>");
+        $newChannel.text(channel["type"] + ": " + channel["id"]);
+        // console.log(channel);
+        $socialContents.append($newChannel);
+        $socialContainer.append($socialContents);
+    });
+
+    currentOfficial.append($socialContainer);
 }
 
 function getTwitterHandle(currentOfficial, channels) {
