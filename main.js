@@ -6,11 +6,6 @@ var ADDRESS = "&address=";
 var MISSING_ADDRESS = ORIGIN + GOOGLE_API_KEY + ADDRESS;
 var TIMES_API_KEY = "6e833b98f0e7467cb50d457c125f6838";
 
-// concatenate Twitter authentication key
-// var TWITTER_API_CONSUMER_KEY = "WCQ5Oybn8HV3GxpHsiui54wvK";
-// var TWITTER_API_CONSUMER_SECRET = "Pm5FLJXz63ZJ74RBlwfxOEguEIk4u66EDxVuuQHu5wgheRK57w";
-// var TWITTER_STRING = btoa(TWITTER_API_CONSUMER_KEY + ":" + TWITTER_API_CONSUMER_SECRET);
-
 // declare variables for form input elements
 var $addressForm = $("[data-input='address-form']");
 var $street = $("[data-input='street']");
