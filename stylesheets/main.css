@@ -1,3 +1,48 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    text-align: center;
+}
+
+.form-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    border: 1px red solid;
+    padding: 15px;
+}
+
+form {
+    display:flex;
+    flex-direction: column;
+    width: 40%;
+    border: 1px green solid;
+    min-width: 380px;
+}
+
+.state {
+    margin-left: 25px;
+}
+
+.submit-button {
+    width: 185px;
+}
+
 .list-officials {
     display: flex;
     /* align-items: center; */
