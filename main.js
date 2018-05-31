@@ -6,9 +6,10 @@ var GOOGLE_API_KEY = "?key=AIzaSyBexCRxO-UEa8lZ_VI3ZGf0WnpN8B54zbI";
 var ADDRESS = "&address=";
 var MISSING_ADDRESS = ORIGIN + GOOGLE_API_KEY + ADDRESS;
 var TIMES_API_KEY = "6e833b98f0e7467cb50d457c125f6838";
+const PROXYURL = `http://my-little-cors-proxy.herokuapp.com/`;
 const TWITTERURL = "https://publish.twitter.com/oembed?url=https://twitter.com/";
 const TWITTERTHEME = "&theme=dark";
-const TWITTERLIMT = "&limit=12"
+const TWITTERLIMIT = "&limit=12"
 
 // declare variables for form input elements
 var $addressForm = $("[data-input='address-form']");
@@ -194,13 +195,59 @@ function appendSocialMedia(currentOfficial, channels, index) {
 
     channels.forEach(function(channel) {
         var $newChannel = $("<div>");
-        $newChannel.text(channel["type"] + ": " + channel["id"]);
-        // console.log(channel);
+        var $newChannelLink = $("<a>");
+        var channelPrefix = "";
+        if (channel["type"] === "Twitter") {
+            channelPrefix = checkSocialType(channel);
+            $newChannelLink.text(channel["type"]);
+            $newChannelLink.attr({href: channelPrefix, target: "_blank"});
+            $newChannelLink.attr("data-embeddedTwitter","");
+            createTwitterListener($newChannelLink, channel["id"]);
+        }
+        else {
+            channelPrefix = checkSocialType(channel);
+            $newChannelLink.text(channel["type"]);
+            $newChannelLink.attr({href: channelPrefix, target: "_blank"});
+        }
+        $newChannel.append($newChannelLink);
         $socialContents.append($newChannel);
         $socialContainer.append($socialContents);
     });
 
     currentOfficial.append($socialContainer);
+}
+
+function checkSocialType(channel) {
+    if (channel["type"] === "Facebook") {
+        return `https://facebook.com/` + channel["id"];
+    }
+    else if (channel["type"] === "YouTube") {
+        return `https://youtube.com/` + channel["id"];
+    }
+    else if (channel["type"] === "GooglePlus") {
+        return `https://plus.google.com/` + channel["id"];
+    }
+    else if (channel["type"] === "Twitter") {
+        return `https://twitter.com/` + channel["id"];
+    }
+}
+
+function createTwitterListener(link, channel) {
+    link.on('click', function (event) {
+        event.preventDefault();
+        getTwitterUrl(channel)
+            .then(function (data) {
+                embeddedTimeLine = data.html;
+                link.append(embeddedTimeLine);
+                link.off();
+            })
+    })
+}
+
+function getTwitterUrl(twitterhandle) {
+    var styledURL = PROXYURL + TWITTERURL + twitterhandle + TWITTERTHEME + TWITTERLIMIT;
+    return $.get(styledURL, function (data) {
+    })
 }
 
 function addSocialListener(socialContainerLink, index) {
@@ -327,13 +374,6 @@ function getArticleSearchUrl(name, title) {
     url += '?' + "q=" + formattedName + /*"+" + formattedTitle +*/ "&api-key=" + TIMES_API_KEY; //+ "&sort=newest"
     return url;
 }
-
-function getTwitterUrl(twitterhandle) {
-    var styledURL = TWITTERURL + twitterhandle + TWITTERTHEME + TWITTERLIMT;
-    $.get(styledURL, function (data) {
-        var embeddedTimeline = $(data.html);
-        return embeddedTimeline;
-    })};
 
 // function to load page with previously stored address data (if available)
 function loadPage () {
