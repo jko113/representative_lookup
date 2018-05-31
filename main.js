@@ -1,3 +1,4 @@
+// import tippy from tippy
 
 // formatting request URL
 var ORIGIN = "https://www.googleapis.com/civicinfo/v2/representatives";
@@ -24,16 +25,16 @@ $addressForm.on("submit", function(event) {
         state: $state.val()
     };
 
-    localStorage.setItem("userAddress", JSON.stringify(userAddress));
+    // localStorage.setItem("userAddress", JSON.stringify(userAddress));
 
-    var ajaxRequest = $.get(MISSING_ADDRESS + formattedAddress, function(data) {
-        localStorage.setItem("repInfo", JSON.stringify(data));
-    });
+    // var ajaxRequest = $.get(MISSING_ADDRESS + formattedAddress, function(data) {
+    //     localStorage.setItem("repInfo", JSON.stringify(data));
+    // });
 
-    ajaxRequest
-        .then(getOfficials)
+    // ajaxRequest
+    //     .then(getOfficials)
 
-    // getOfficials();
+    getOfficials();
 });
 
 function formatAddress(unformattedAddress, unformattedCity, unformattedState) {
@@ -184,6 +185,8 @@ function appendSocialMedia(currentOfficial, channels, index) {
     $socialContents.attr("data-social-" + index, "");
     $socialContents.addClass("hidden");
 
+    // $socialContents.hide();
+
     channels.forEach(function(channel) {
         var $newChannel = $("<div>");
         $newChannel.text(channel["type"] + ": " + channel["id"]);
@@ -198,9 +201,20 @@ function appendSocialMedia(currentOfficial, channels, index) {
 function addSocialListener(socialContainerLink, index) {
     socialContainerLink.on("click", function(event) {
         event.preventDefault();
+
         var $hiddenSocialDiv = $("[data-social-" + index + "]");
-        $hiddenSocialDiv.toggleClass("hidden");
-        // console.log(socialContainerLink);
+
+        if ($hiddenSocialDiv.hasClass("hidden")) {
+            $hiddenSocialDiv.removeClass("hidden");
+            $hiddenSocialDiv.addClass("social-popup");
+        } else {
+            $hiddenSocialDiv.addClass("hidden");
+            $hiddenSocialDiv.removeClass("social-popup");
+        }
+
+        var popper = new Popper(socialContainerLink, $hiddenSocialDiv, {
+            placement: "top"
+        });
     });
 }
 
