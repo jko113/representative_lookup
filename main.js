@@ -153,7 +153,12 @@ function appendTitle(currentOfficial, text) {
 function appendParty(currentOfficial, text) {
     var $newDiv = $("<div>");
     $newDiv.attr("data-party", "");
-    $newDiv.text(text);
+
+    if (text === "Unknown") {
+        $newDiv.text("Party: " + text);
+    } else  {
+        $newDiv.text(text);
+    }
     currentOfficial.append($newDiv);
 }
 
@@ -167,10 +172,16 @@ function appendTwitterHandle(currentOfficial, handle) {
 
 function appendSocialMedia(currentOfficial, channels, index) {
     var $socialContainer = $("<div>");
-    $socialContainer.attr("data-social-" + index, "");
-    $socialContainer.text("Social Media");
+    // $socialContainer.attr("data-social-" + index, "");
+    var $socialContainerLink = $("<a>");
+    $socialContainerLink.attr("href", "#");
+    $socialContainerLink.text("Social Media");
+    $socialContainer.append($socialContainerLink);
+
+    addSocialListener($socialContainerLink, index);
     
     var $socialContents = $("<div>");
+    $socialContents.attr("data-social-" + index, "");
     $socialContents.addClass("hidden");
 
     channels.forEach(function(channel) {
@@ -182,6 +193,15 @@ function appendSocialMedia(currentOfficial, channels, index) {
     });
 
     currentOfficial.append($socialContainer);
+}
+
+function addSocialListener(socialContainerLink, index) {
+    socialContainerLink.on("click", function(event) {
+        event.preventDefault();
+        var $hiddenSocialDiv = $("[data-social-" + index + "]");
+        $hiddenSocialDiv.toggleClass("hidden");
+        // console.log(socialContainerLink);
+    });
 }
 
 function getTwitterHandle(currentOfficial, channels) {
@@ -214,17 +234,6 @@ function appendArticleSearch(currentOfficial, index) {
 }
 
 function appendWebsite(currentOfficial, item) {
-    // var $urls = $("<div>");
-    // var $websites = $("<div>");
-    // $urls.append($websites);
-    // $websites.text("Website:");
-    // item.urls.forEach(function (subItem) {
-    //     var $websiteAnchor = $("<a>");
-    //     $websiteAnchor.attr("href", subItem);
-    //     $websiteAnchor.attr("target", "_blank");
-    //     $websiteAnchor.text(subItem);
-    //     $urls.append($websiteAnchor);
-    // });
 
     var $urls = $("<div>");
     var $website = $("<a>");
@@ -233,15 +242,6 @@ function appendWebsite(currentOfficial, item) {
 
     $website.attr("href", item.urls[0]);
     $website.attr("target", "_blank");
-    /*
-    item.urls.forEach(function (subItem) {
-        var $websiteAnchor = $("<a>");
-        $websiteAnchor.attr("href", subItem);
-        $websiteAnchor.attr("target", "_blank");
-        $websiteAnchor.text(subItem);
-        $urls.append($websiteAnchor);
-    });
-    */
 
     currentOfficial.append($urls);
 }
