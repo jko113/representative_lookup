@@ -23,7 +23,6 @@ body {
     width: 100%;
     flex-direction: column;
     align-items: center;
-    border: 1px red solid;
     padding: 15px;
 }
 
@@ -31,7 +30,6 @@ form {
     display:flex;
     flex-direction: column;
     width: 40%;
-    border: 1px green solid;
     min-width: 380px;
 }
 
@@ -45,7 +43,6 @@ form {
 
 .list-officials {
     display: flex;
-    /* align-items: center; */
     flex-wrap: wrap;
 }
 
@@ -54,15 +51,24 @@ form {
     color: whitesmoke;
     border: 1px solid red;
     padding: 15px;
-    flex: 0 0 20%;/*auto;*/
+    /* flex: 0 0 20%; */
+    flex: 1;
+    flex-grow: 0;
     margin: 5px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
 }
 
+.social-popup {
+    background: lightgray;
+    color: rgb(28,28,28);
+    padding: 20px;
+}
+
 .official-box a:link {
     color: darkorange;
+    text-decoration: none;
 }
 
 .official-box a:visited {
@@ -75,7 +81,7 @@ form {
 }
 
 .official-image {
-    max-width: 200px;
+    width: 200px;
     border-radius: 50%;
 }
 
