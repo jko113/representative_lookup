@@ -179,13 +179,15 @@ function appendSocialMedia(currentOfficial, channels, index) {
     // $socialContainer.attr("data-social-" + index, "");
     var $socialContainerLink = $("<a>");
     $socialContainerLink.attr("href", "#");
+    $socialContainerLink.attr("data-social-anchor", index);
     $socialContainerLink.text("Social Media");
     $socialContainer.append($socialContainerLink);
 
     addSocialListener($socialContainerLink, index);
     
     var $socialContents = $("<div>");
-    $socialContents.attr("data-social-" + index, "");
+    // $socialContents.attr("data-social-" + index, "");
+    $socialContents.attr("data-social", index);
     $socialContents.addClass("hidden");
 
     // $socialContents.hide();
@@ -204,20 +206,31 @@ function appendSocialMedia(currentOfficial, channels, index) {
 function addSocialListener(socialContainerLink, index) {
     socialContainerLink.on("click", function(event) {
         event.preventDefault();
-
-        var $hiddenSocialDiv = $("[data-social-" + index + "]");
+        var formatHiddenSocialDiv = "[data-social='" + index + "']"
+        var $hiddenSocialDiv = $(formatHiddenSocialDiv);
 
         if ($hiddenSocialDiv.hasClass("hidden")) {
             $hiddenSocialDiv.removeClass("hidden");
             $hiddenSocialDiv.addClass("social-popup");
+            var popper = new Popper(socialContainerLink, $hiddenSocialDiv, {
+                placement: "top"
+            });
         } else {
             $hiddenSocialDiv.addClass("hidden");
             $hiddenSocialDiv.removeClass("social-popup");
-        }
+        }      
+    });
 
-        var popper = new Popper(socialContainerLink, $hiddenSocialDiv, {
-            placement: "top"
-        });
+    socialContainerLink.on("focusout", function(event) {
+        event.preventDefault();
+        var formatHiddenSocialDiv = "[data-social='" + index + "']"
+        var $hiddenSocialDiv = $(formatHiddenSocialDiv);
+
+        if (!$hiddenSocialDiv.hasClass("hidden")) {
+            $hiddenSocialDiv.addClass("hidden");
+            $hiddenSocialDiv.removeClass("social-popup");
+        } 
+        // console.log("focused out");
     });
 }
 
