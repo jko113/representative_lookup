@@ -6,6 +6,9 @@ var GOOGLE_API_KEY = "?key=AIzaSyBexCRxO-UEa8lZ_VI3ZGf0WnpN8B54zbI";
 var ADDRESS = "&address=";
 var MISSING_ADDRESS = ORIGIN + GOOGLE_API_KEY + ADDRESS;
 var TIMES_API_KEY = "6e833b98f0e7467cb50d457c125f6838";
+const TWITTERURL = "https://publish.twitter.com/oembed?url=https://twitter.com/";
+const TWITTERTHEME = "&theme=dark";
+const TWITTERLIMT = "&limit=12"
 
 // declare variables for form input elements
 var $addressForm = $("[data-input='address-form']");
@@ -312,6 +315,12 @@ function getArticleSearchUrl(name, title) {
     return url;
 }
 
+function getTwitterUrl(twitterhandle) {
+    var styledURL = TWITTERURL + twitterhandle + TWITTERTHEME + TWITTERLIMT;
+    $.get(styledURL, function (data) {
+        var embeddedTimeline = $(data.html);
+        return embeddedTimeline;
+    })};
 
 // function to load page with previously stored address data (if available)
 function loadPage () {
