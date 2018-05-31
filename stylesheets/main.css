@@ -37,6 +37,10 @@ form {
     margin-left: 25px;
 }
 
+.form-row {
+    margin: 0;
+}
+
 .submit-button {
     width: 185px;
 }
