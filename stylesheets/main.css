@@ -12,10 +12,82 @@ html,
 body {
     width: 100%;
     height: 100%;
+    font-size: 100%;
+    background-color: ghostwhite;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.header {
+.nav-bar {
+    display: flex;
+    background-color: #333;
+    width: 100%;
+    height: 60px;
+    align-items: center;
+}
+
+.left-header {
+    display: flex;
+    align-items: center;
+    width: 50%;
+}
+
+.right-header {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.right-header div {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.site-name {
     text-align: center;
+    padding: 10px;
+    color: whitesmoke;
+    margin-left: 15px;
+    margin-bottom: 0;
+    padding-left: 0px;
+}
+
+.home, .about {
+    color: whitesmoke;
+    border-right: rgba(245,245,245, .4) 1px solid;
+    padding: 10px;
+    margin: 0px;
+    height: 100%;  
+    font-size: 1.5rem;
+}
+
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    height: 100%;
+    text-decoration: none;
+    color:rgba(245, 245, 245, .7);
+    width: 84px;
+}
+    
+.link-github {
+    width: 60px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s;
+    color: rgba(245, 245, 245, .7);
+}
+
+.link:hover, .link-github:hover {
+    background-color: grey;
+    text-decoration: none;
+    color: whitesmoke;
 }
 
 .form-container {
@@ -24,30 +96,40 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 15px;
+    margin-bottom: 5px;
 }
 
 form {
     display:flex;
     flex-direction: column;
-    width: 40%;
-    min-width: 380px;
+    width: 30%;
+    min-width: 280px;
 }
 
-.state {
-    margin-left: 25px;
+.city {
+    width: 275px;
 }
 
-.form-row {
-    margin: 0;
+.state, .btn {
+    width: 200px;
 }
 
-.submit-button {
-    width: 185px;
+.submit-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+
+.state, .city, .street-address, label {
+    margin-bottom: 0px;
+    margin-top: 3px;
 }
 
 .list-officials {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .button-container {
@@ -95,20 +177,99 @@ form {
     color: darkorange;
 }
 
+.official-imageUrl-container {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 250px;
+    overflow: hidden;
+    /* background-color: orange; */
+}
+
 .official-imageUrl {
     align-self: center;
-    padding-bottom: 15px;
 }
 
 .official-image {
+    /* object-fit: contain; */
     width: 200px;
+    max-height: 100%;
     border-radius: 50%;
 }
 
 .no-official-image {
-    max-width: 200px;
+    width: 200px;
 }
 
 .hidden {
     display: none;
+}
+
+@media screen and (min-width: 360px) {
+
+.link {
+    width: 40px;
+    font-size: 0.5rem;
+}
+
+.link-github {
+    font-size: .5em;
+    width: 30px;
+}
+
+.site-name {
+    font-size: 15px;
+}    
+
+.nav-bar {
+    height: 30px;
+}
+
+}
+
+@media screen and (min-width: 768px) {
+
+.link {
+    width: 60px;
+    font-size: 1.0rem;
+}
+
+.link-github {
+    font-size: .75em;
+    width: 45px;
+}
+
+.site-name {
+    font-size: 25px;
+}
+
+.nav-bar {
+    height: 45px;
+}
+
+}
+
+@media screen and (min-width: 1200px) {
+
+.link {
+    width: 84px;
+    font-size: 1.5rem;
+}
+
+.link-github {
+    font-size: 1em;
+    width: 60px;
+}
+
+.site-name {
+    font-size: 40px;
+}
+
+.nav-bar {
+    height: 60px;
+}
+
 }

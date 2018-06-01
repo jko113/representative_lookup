@@ -4,24 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
     <title>Representative Lookup</title>
     <link rel="stylesheet" href="stylesheets/main.css">
 </head>
 <body>
-    <header class="header"><h1>Representative Lookup</h1></header>
+    <div class="nav-bar">
+        <div class="left-header">
+            <div class="site-name-container">
+                <h1 class="site-name">Representative Lookup</h1>
+            </div>
+        </div>
+
+        <div class="right-header">
+            <div>
+                <a class="link home" href="index.html">Home</a> 
+            </div>
+            <div>
+                <a class="link about" href="about.html">About</a>
+            </div>
+            <div>
+                <a class="link-github" href="https://github.com/jko113/representative_lookup" target="_blank">
+                    <i class="fab fa-github fa-2x"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    
     <br>
 
     <div class="form-container">
         <form class="address" data-input="address-form">
-            <div class="form-group">
+            <div class="form-group street-address">
                 <label for="street">Street Address: </label>
                 <br>
                 <input type="text" data-input="street" autocomplete='address-line1' class="form-control street">
             </div>
-            <div class="form-row">
-                <div class="form-group">
+            <!-- <div class="form-row"> -->
+                <div class="form-group city">
                     <label for="city">City: </label>
                     <input type="text" data-input="city" autocomplete='address-level2' class="form-control">
                 </div>
@@ -81,8 +105,10 @@
                         <option value="WY">Wyoming</option>
                     </select>  
                 </div>
+            <!-- </div> -->
+            <div class="submit-button-container">
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-            <button type="submit" class="btn btn-primary submit-button">Submit</button>
         </form>
     </div>    
     <div class="data-show" data-show>
