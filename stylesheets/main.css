@@ -162,11 +162,15 @@ form {
     border-radius: 10px;
 }
 
-.social-popup {
+.social-popup, .article-popup {
     background: lightgray;
     color: rgb(28,28,28);
     padding: 20px;
 }
+
+/* .article-popup {
+
+} */
 
 .official-box a:link {
     color: darkorange;
