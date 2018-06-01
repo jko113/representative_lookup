@@ -72,16 +72,36 @@ function getDivisions() {
     var $listDivisions = $("<div>");
     var divisions = fullData.divisions;
 
+    appendAllOfficialsButton(fullData, $listDivisions);
+
     Object.keys(divisions).forEach(function(division) {
         var $newDivisionButton = $("<button>");
         $newDivisionButton.text(divisions[division]["name"]);
         var offices = divisions[division]["officeIndices"];
-        $listDivisions.append($newDivisionButton);
-        addDivisionListener($newDivisionButton, offices);
+        
+        if (offices && offices.length) {
+            addDivisionListener($newDivisionButton, offices);
+            $listDivisions.append($newDivisionButton);
+        }
     });
 
     $dataDiv.append($listDivisions);
 
+}
+
+function appendAllOfficialsButton(dataset, listDivisions) {
+    var $allOfficialsButton = $("<button>");
+    $allOfficialsButton.text("All");
+
+    var allOfficesArray = [];
+
+    // console.log(Object.keys(dataset.offices));
+    dataset.offices.forEach(function(office, officeIndex) {
+        allOfficesArray.push(officeIndex);
+    });
+
+    addDivisionListener($allOfficialsButton, allOfficesArray);
+    listDivisions.append($allOfficialsButton);
 }
 
 function addDivisionListener(button, officeArray) {
@@ -91,39 +111,11 @@ function addDivisionListener(button, officeArray) {
         var offices = [];
         var officials = [];
         
-        if (officeArray) {
-            offices = getOffices(officeArray);
-        }
+        offices = getOffices(officeArray);
+        officials = getOfficialsByOffice(offices);
+        getOfficials(officials);
 
-        if (offices) {
-            officials = getOfficialsByOffice(offices);
-        }
-
-        if (officials.length) {
-            getOfficials(officials);
-        } else {
-            alert("No known official for this division.");
-        }
     });
-}
-
-function getOfficialsByOffice(filteredOfficeArray) {
-    var fullData = JSON.parse(localStorage.getItem("repInfo"));
-    var officials = [];
-
-
-    fullData.officials.forEach(function(official, officialIndex) {
-
-        filteredOfficeArray.forEach(function(office, officeIndex) {
-            if (office["officialIndices"].includes(officialIndex)) {
-
-                official["officialIndex"] = officialIndex;
-                officials.push(official);
-            }
-        });
-    });
-
-    return officials;
 }
 
 function getOffices(officeArray) {
@@ -141,10 +133,27 @@ function getOffices(officeArray) {
 
             }
         });
-
     });
 
     return offices;
+}
+
+function getOfficialsByOffice(filteredOfficeArray) {
+    var fullData = JSON.parse(localStorage.getItem("repInfo"));
+    var officials = [];
+
+    fullData.officials.forEach(function(official, officialIndex) {
+
+        filteredOfficeArray.forEach(function(office, officeIndex) {
+            if (office["officialIndices"].includes(officialIndex)) {
+
+                official["officialIndex"] = officialIndex;
+                officials.push(official);
+            }
+        });
+    });
+
+    return officials;
 }
 
 /*
