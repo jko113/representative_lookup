@@ -28,16 +28,16 @@ $addressForm.on("submit", function(event) {
         state: $state.val()
     };
 
-    localStorage.setItem("userAddress", JSON.stringify(userAddress));
+    // localStorage.setItem("userAddress", JSON.stringify(userAddress));
 
-    var ajaxRequest = $.get(MISSING_ADDRESS + formattedAddress, function(data) {
-        localStorage.setItem("repInfo", JSON.stringify(data));
-    });
+    // var ajaxRequest = $.get(MISSING_ADDRESS + formattedAddress, function(data) {
+    //     localStorage.setItem("repInfo", JSON.stringify(data));
+    // });
 
-    ajaxRequest
-        .then(getDivisions)
+    // ajaxRequest
+    //     .then(getDivisions)
 
-    //getDivisions();
+    getDivisions();
     //getOfficials();
 });
 
@@ -68,8 +68,13 @@ function formatAddress(unformattedAddress, unformattedCity, unformattedState) {
 }
 
 function getDivisions() {
+    // clear out officials and divisions from content area, if present
+    clearOfficials();
+    clearDivisions();
+
     var fullData = JSON.parse(localStorage.getItem("repInfo"));
     var $listDivisions = $("<div>");
+    $listDivisions.addClass("button-container");
     var divisions = fullData.divisions;
 
     appendAllOfficialsButton(fullData, $listDivisions);
@@ -77,6 +82,7 @@ function getDivisions() {
     Object.keys(divisions).forEach(function(division) {
         var $newDivisionButton = $("<button>");
         $newDivisionButton.text(divisions[division]["name"]);
+        $newDivisionButton.addClass("division-button");
         var offices = divisions[division]["officeIndices"];
         
         if (offices && offices.length) {
@@ -92,6 +98,7 @@ function getDivisions() {
 function appendAllOfficialsButton(dataset, listDivisions) {
     var $allOfficialsButton = $("<button>");
     $allOfficialsButton.text("All");
+    $allOfficialsButton.addClass("division-button");
 
     var allOfficesArray = [];
 
@@ -165,8 +172,7 @@ function isValidOffice (officeArray) {
 
 function getOfficials (officialsArray) {
     // clear out officials from content area, if present
-    $(".official-box").remove();
-    $(".list-officials").remove();
+    clearOfficials();
 
     // have full data set available for grabbing office name (i.e., title/position)
     var fullData = JSON.parse(localStorage.getItem("repInfo"));
@@ -221,6 +227,16 @@ function getOfficials (officialsArray) {
     // append completed list of filtered officials to the $data-div
     // so that it displays on screen in its entirety
     $dataDiv.append($listOfficials);
+}
+
+function clearOfficials() {
+    $(".official-box").remove();
+    $(".list-officials").remove();
+}
+
+function clearDivisions() {
+    $(".button-container").remove();
+    $(".division-button").remove();
 }
 
 // helper functions for adding individual pieces of data
