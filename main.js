@@ -200,7 +200,7 @@ function appendSocialMedia(currentOfficial, channels, index) {
         if (channel["type"] === "Twitter") {
             channelPrefix = checkSocialType(channel);
             $newChannelLink.text(channel["type"]);
-            $newChannelLink.attr({href: channelPrefix, target: "_blank"});
+            $newChannelLink.attr({href: channelPrefix, target: "_blank", overflow: "scroll"});
             $newChannelLink.attr("data-embeddedTwitter","");
             createTwitterListener($newChannelLink, channel["id"]);
         }
@@ -239,6 +239,7 @@ function createTwitterListener(link, channel) {
             .then(function (data) {
                 embeddedTimeLine = data.html;
                 link.append(embeddedTimeLine);
+                link.css("overflow-y","scroll");
                 link.off();
             })
     })
@@ -268,17 +269,17 @@ function addSocialListener(socialContainerLink, index) {
         }      
     });
 
-    socialContainerLink.on("focusout", function(event) {
-        event.preventDefault();
-        var formatHiddenSocialDiv = "[data-social='" + index + "']"
-        var $hiddenSocialDiv = $(formatHiddenSocialDiv);
+    // socialContainerLink.on("focusout", function(event) {
+    //     event.preventDefault();
+    //     var formatHiddenSocialDiv = "[data-social='" + index + "']"
+    //     var $hiddenSocialDiv = $(formatHiddenSocialDiv);
 
-        if (!$hiddenSocialDiv.hasClass("hidden")) {
-            $hiddenSocialDiv.addClass("hidden");
-            $hiddenSocialDiv.removeClass("social-popup");
-        } 
-        // console.log("focused out");
-    });
+    //     if (!$hiddenSocialDiv.hasClass("hidden")) {
+    //         $hiddenSocialDiv.addClass("hidden");
+    //         $hiddenSocialDiv.removeClass("social-popup");
+    //     } 
+    //     // console.log("focused out");
+    // });
 }
 
 function getTwitterHandle(currentOfficial, channels) {
@@ -329,18 +330,22 @@ function prependPhoto(currentOfficial, item) {
 
         var $imageUrl = $("<a>");
         var $image = $("<img>");
+        var $imageContainer = $("<div>")
         $imageUrl.addClass("official-imageUrl");
         $image.addClass("official-image");
         $imageUrl.append($image);
         
         $imageUrl.attr("href", item.photoUrl);
         $image.attr("src", item.photoUrl);
-        currentOfficial.prepend($imageUrl);
+        $imageContainer.append($imageUrl)
+        $imageContainer.addClass("official-imageUrl-container");
+        currentOfficial.prepend($imageContainer);
 
     } else {
 
         var $imageUrl = $("<a>");
         var $image = $("<img>");
+        var $imageContainer = $("<div>")
         $imageUrl.addClass("official-imageUrl");
         $imageUrl.attr("target", "_blank");
         $image.addClass("no-official-image");
@@ -357,7 +362,9 @@ function prependPhoto(currentOfficial, item) {
         });
         $imageUrl.attr("href", "https://www.google.com/search?tbm=isch&q=" + formattedName);
         $image.attr("src", "images/no-image-available.jpg");
-        currentOfficial.prepend($imageUrl);
+        $imageContainer.append($imageUrl);
+        $imageContainer.addClass("official-imageUrl-container");
+        currentOfficial.prepend($imageContainer);
 
     }
 }
