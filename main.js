@@ -397,11 +397,32 @@ function appendArticleSearch(currentOfficial, index) {
     var $newDiv = $("<div>");
     var $newAnchor = $("<a>");
     $newDiv.append($newAnchor);
-    $newAnchor.attr("data-article-search", "");
-    $newAnchor.attr("href", searchUrl);
+    // $newAnchor.attr("data-article-search", "");
+    $newAnchor.attr("data-article-search", searchUrl);
+    addArticleListener($newAnchor);
+    // $newAnchor.attr("href", searchUrl);
+    $newAnchor.attr("href", "#");
     $newAnchor.attr("target", "_blank");
     $newAnchor.text("NY Times Article Search");
     currentOfficial.append($newDiv);
+}
+
+function addArticleListener(anchor) {
+    anchor.on("click", function(event) {
+        event.preventDefault();
+        var requestUrl = anchor[0].dataset["articleSearch"];
+        
+        // $.get(requestUrl).then(function(data) {
+        //     localStorage.setItem("Times", JSON.stringify(data.response["docs"]));
+            // localStorage.setItem("Times", JSON.stringify(data));
+        $.get(requestUrl)
+            .then(storeArticles)
+            // .then()
+    });
+}
+
+function storeArticles(data) {
+    localStorage.setItem("Times", JSON.stringify(data.response["docs"]));
 }
 
 function appendWebsite(currentOfficial, item) {
