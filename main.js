@@ -28,7 +28,7 @@ $addressForm.on("submit", function(event) {
         state: $state.val()
     };
 
-    // localStorage.setItem("userAddress", JSON.stringify(userAddress));
+    localStorage.setItem("userAddress", JSON.stringify(userAddress));
 
     // var ajaxRequest = $.get(MISSING_ADDRESS + formattedAddress, function(data) {
     //     localStorage.setItem("repInfo", JSON.stringify(data));
@@ -412,34 +412,86 @@ function appendArticleSearch(currentOfficial, index) {
     var searchUrl = getArticleSearchUrl(officialName.text(), officialTitle.text());
 
     var $newDiv = $("<div>");
+    $newDiv.addClass("times-div");
     var $newAnchor = $("<a>");
     $newDiv.append($newAnchor);
-    // $newAnchor.attr("data-article-search", "");
-    $newAnchor.attr("data-article-search", searchUrl);
-    addArticleListener($newAnchor);
-    // $newAnchor.attr("href", searchUrl);
+    $newAnchor.attr("data-article-search-" + index, searchUrl);
+
+    addArticleListener($newAnchor, index);
+
     $newAnchor.attr("href", "#");
     $newAnchor.attr("target", "_blank");
     $newAnchor.text("NY Times Article Search");
+    
+    var $articleContent = $("<div>");
+    $articleContent.attr("data-articles-" + index, "");
+    $articleContent.addClass("hidden");
+    var $articlePopup = $("<div>");
+    $articlePopup.attr("data-article-popup-" + index, "");
+ 
+    $newDiv.append($articleContent);
+    $articleContent.append($articlePopup);
+
     currentOfficial.append($newDiv);
 }
 
-function addArticleListener(anchor) {
+function addArticleListener(anchor, index) {
     anchor.on("click", function(event) {
+
         event.preventDefault();
-        var requestUrl = anchor[0].dataset["articleSearch"];
+        $articleDiv = $("[data-articles-" + index + "]");
+        var requestUrl = anchor[0].dataset["articleSearch-" + index];
+
+        if ($articleDiv.hasClass("hidden")) {
+
+            $articleDiv.removeClass("hidden");
+            $articleDiv.addClass("article-popup");
+            var popper = new Popper(anchor, $articleDiv, {
+                placement: "top"
+            });
+
+            $.get(requestUrl)
+                .then(storeArticles)
+                .then(populateArticlePopup)
+        } else {
+            $articleDiv.removeClass("article-popup");
+            $articleDiv.addClass("hidden");
+        }
         
-        // $.get(requestUrl).then(function(data) {
-        //     localStorage.setItem("Times", JSON.stringify(data.response["docs"]));
-            // localStorage.setItem("Times", JSON.stringify(data));
-        $.get(requestUrl)
-            .then(storeArticles)
-            // .then()
+
     });
 }
 
+function populateArticlePopup(index) {
+    var articles = JSON.parse(localStorage.getItem("Times"));
+    var $articlePopup = $(".article-popup");
+    $articlePopup.empty();
+
+    if (articles.length) {
+        articles.forEach(function(article) {
+            $newArticle = $("<div>");
+            var $newArticleLink = $("<a>");
+            $newArticleLink.attr({href: article["web_url"], target: "_blank"});
+    
+            var headline = article["headline"]["main"]
+            if (headline.length > 25) {
+                headline = headline.slice(0,25) + "...";
+            }
+            $newArticleLink.text(headline);
+            $articlePopup.append($newArticle);
+            $newArticle.append($newArticleLink);
+        });
+    } else {
+        var $noArticle = $("<div>")
+        $noArticle.text("No articles found.");
+        $articlePopup.append($noArticle);
+    }
+}
+
 function storeArticles(data) {
-    localStorage.setItem("Times", JSON.stringify(data.response["docs"]));
+    if (data.response["docs"]) {
+        localStorage.setItem("Times", JSON.stringify(data.response["docs"]));
+    }
 }
 
 function appendWebsite(currentOfficial, item) {
