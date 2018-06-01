@@ -1,4 +1,3 @@
-// import tippy from tippy
 
 // formatting request URL
 var ORIGIN = "https://www.googleapis.com/civicinfo/v2/representatives";
@@ -29,16 +28,17 @@ $addressForm.on("submit", function(event) {
         state: $state.val()
     };
 
-    // localStorage.setItem("userAddress", JSON.stringify(userAddress));
+    localStorage.setItem("userAddress", JSON.stringify(userAddress));
 
-    // var ajaxRequest = $.get(MISSING_ADDRESS + formattedAddress, function(data) {
-    //     localStorage.setItem("repInfo", JSON.stringify(data));
-    // });
+    var ajaxRequest = $.get(MISSING_ADDRESS + formattedAddress, function(data) {
+        localStorage.setItem("repInfo", JSON.stringify(data));
+    });
 
-    // ajaxRequest
-    //     .then(getOfficials)
+    ajaxRequest
+        .then(getDivisions)
 
-    getOfficials();
+    //getDivisions();
+    //getOfficials();
 });
 
 function formatAddress(unformattedAddress, unformattedCity, unformattedState) {
@@ -67,17 +67,113 @@ function formatAddress(unformattedAddress, unformattedCity, unformattedState) {
     return results;
 }
 
-function getOfficials () {
+function getDivisions() {
+    var fullData = JSON.parse(localStorage.getItem("repInfo"));
+    var $listDivisions = $("<div>");
+    var divisions = fullData.divisions;
+
+    Object.keys(divisions).forEach(function(division) {
+        var $newDivisionButton = $("<button>");
+        $newDivisionButton.text(divisions[division]["name"]);
+        var offices = divisions[division]["officeIndices"];
+        $listDivisions.append($newDivisionButton);
+        addDivisionListener($newDivisionButton, offices);
+    });
+
+    $dataDiv.append($listDivisions);
+
+}
+
+function addDivisionListener(button, officeArray) {
+    button.on("click", function(event) {
+        event.preventDefault();
+
+        var offices = [];
+        var officials = [];
+        
+        if (officeArray) {
+            offices = getOffices(officeArray);
+        }
+
+        if (offices) {
+            officials = getOfficialsByOffice(offices);
+        }
+
+        if (officials.length) {
+            getOfficials(officials);
+        } else {
+            alert("No known official for this division.");
+        }
+    });
+}
+
+function getOfficialsByOffice(filteredOfficeArray) {
+    var fullData = JSON.parse(localStorage.getItem("repInfo"));
+    var officials = [];
+
+
+    fullData.officials.forEach(function(official, officialIndex) {
+
+        filteredOfficeArray.forEach(function(office, officeIndex) {
+            if (office["officialIndices"].includes(officialIndex)) {
+
+                official["officialIndex"] = officialIndex;
+                officials.push(official);
+            }
+        });
+    });
+
+    return officials;
+}
+
+function getOffices(officeArray) {
+
+    var fullData = JSON.parse(localStorage.getItem("repInfo"));
+    // var offices = fullData.offices.filter(isValidOffice);
+    var offices = [];
+
+    fullData.offices.forEach(function(office, officeIndex) {
+
+        officeArray.forEach(function(trimmedOffice) {
+            if (officeIndex === trimmedOffice) {
+                // console.log("officeIndex: " + officeIndex + " trimmedOffice: " + trimmedOffice);
+                offices.push(office);
+
+            }
+        });
+
+    });
+
+    return offices;
+}
+
+/*
+function isValidOffice (officeArray) {
+    var fullData = JSON.parse(localStorage.getItem("repInfo"));
+    // return Object.keys(fullData.offices).includes(officeArray.values());
+}
+*/
+
+function getOfficials (officialsArray) {
+    // clear out officials from content area, if present
+    $(".official-box").remove();
+    $(".list-officials").remove();
+
+    // have full data set available for grabbing office name (i.e., title/position)
     var fullData = JSON.parse(localStorage.getItem("repInfo"));
     var $listOfficials = $("<div>");
 
+    // create new official list div to contain the officials at
+    // the selected level of government
     $listOfficials.addClass("list-officials");
     $listOfficials.attr("data-officials", "");
 
-    //console.log(fullData.officials);
-    fullData.officials.forEach(function(official, officialIndex) {
-        // console.log(official);
+    // loop through each official in the filtered list,
+    // add all the relevant details,
+    // and finally append each one to the content div 
+    officialsArray.forEach(function(official, officialIndex) {
 
+        // div to contain the individual official
         var $currentOfficial = $("<div>");
         $currentOfficial.addClass("official-box");
         $currentOfficial.attr("data-official-box", "");
@@ -86,7 +182,7 @@ function getOfficials () {
         appendName($currentOfficial, official.name);
 
         // append official's office title
-        var officeName = getOfficeName(fullData.offices, officialIndex);
+        var officeName = getOfficeName(fullData.offices, official["officialIndex"]);
         appendTitle($currentOfficial, officeName);
 
         // append official's party
@@ -99,11 +195,6 @@ function getOfficials () {
 
         // prepend photo
         prependPhoto($currentOfficial, official);
-
-        // append Twitter Handle
-        // var twitterHandle = getTwitterHandle($currentOfficial, official.channels);
-        // // console.log(official.channels);
-        // appendTwitterHandle($currentOfficial, twitterHandle);
 
         // append social media channels
         if (official.channels) {
@@ -118,7 +209,7 @@ function getOfficials () {
 
     });
 
-    // append completed list of officials to the $data-div
+    // append completed list of filtered officials to the $data-div
     // so that it displays on screen in its entirety
     $dataDiv.append($listOfficials);
 }
@@ -127,11 +218,10 @@ function getOfficials () {
 // to the official-box
 
 function getOfficeName(arrayOfOffices, officialIndex) {
-    // console.log(arrayOfOffices);
+    
     var results = "";
     
     arrayOfOffices.forEach(function(office, officeIndex) {
-        //console.log("indices: " + office.officialIndices + "name: " + office.name);
             
         if (office.officialIndices && office.officialIndices.includes(officialIndex)) {
             results = office.name;
@@ -168,7 +258,6 @@ function appendParty(currentOfficial, text) {
 }
 
 function appendTwitterHandle(currentOfficial, handle) {
-    //console.log(handle);
     var $newDiv = $("<div>");
     $newDiv.attr("data-twitter", "");
     $newDiv.text(handle);
@@ -177,7 +266,6 @@ function appendTwitterHandle(currentOfficial, handle) {
 
 function appendSocialMedia(currentOfficial, channels, index) {
     var $socialContainer = $("<div>");
-    // $socialContainer.attr("data-social-" + index, "");
     var $socialContainerLink = $("<a>");
     $socialContainerLink.attr("href", "#");
     $socialContainerLink.attr("data-social-anchor", index);
@@ -187,11 +275,8 @@ function appendSocialMedia(currentOfficial, channels, index) {
     addSocialListener($socialContainerLink, index);
     
     var $socialContents = $("<div>");
-    // $socialContents.attr("data-social-" + index, "");
     $socialContents.attr("data-social", index);
     $socialContents.addClass("hidden");
-
-    // $socialContents.hide();
 
     channels.forEach(function(channel) {
         var $newChannel = $("<div>");
@@ -268,24 +353,23 @@ function addSocialListener(socialContainerLink, index) {
         }      
     });
 
-    socialContainerLink.on("focusout", function(event) {
-        event.preventDefault();
-        var formatHiddenSocialDiv = "[data-social='" + index + "']"
-        var $hiddenSocialDiv = $(formatHiddenSocialDiv);
+    // socialContainerLink.on("focusout", function(event) {
+    //     event.preventDefault();
+    //     var formatHiddenSocialDiv = "[data-social='" + index + "']"
+    //     var $hiddenSocialDiv = $(formatHiddenSocialDiv);
 
-        if (!$hiddenSocialDiv.hasClass("hidden")) {
-            $hiddenSocialDiv.addClass("hidden");
-            $hiddenSocialDiv.removeClass("social-popup");
-        } 
-        // console.log("focused out");
-    });
+    //     if (!$hiddenSocialDiv.hasClass("hidden")) {
+    //         $hiddenSocialDiv.addClass("hidden");
+    //         $hiddenSocialDiv.removeClass("social-popup");
+    //     } 
+    //     // console.log("focused out");
+    // });
 }
 
 function getTwitterHandle(currentOfficial, channels) {
     results = "";
     
     if (channels) {
-        results = "";
         channels.forEach(function(item) {
             if (item["type"] === "Twitter") {
                 results = item["id"];
@@ -296,6 +380,7 @@ function getTwitterHandle(currentOfficial, channels) {
 }
 
 function appendArticleSearch(currentOfficial, index) {
+    
     var officialName = currentOfficial.find("[data-name]");
     var officialTitle = currentOfficial.find("[data-title]");
     var searchUrl = getArticleSearchUrl(officialName.text(), officialTitle.text());
@@ -363,7 +448,7 @@ function prependPhoto(currentOfficial, item) {
 }
 
 function getArticleSearchUrl(name, title) {
-    // console.log(name);
+
     var names = name.split(" ");
     var formattedName = names.join("+");
 
