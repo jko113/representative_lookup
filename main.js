@@ -30,14 +30,14 @@ $addressForm.on("submit", function(event) {
 
     localStorage.setItem("userAddress", JSON.stringify(userAddress));
 
-    // var ajaxRequest = $.get(MISSING_ADDRESS + formattedAddress, function(data) {
-    //     localStorage.setItem("repInfo", JSON.stringify(data));
-    // });
+    var ajaxRequest = $.get(MISSING_ADDRESS + formattedAddress, function(data) {
+        localStorage.setItem("repInfo", JSON.stringify(data));
+    });
 
-    // ajaxRequest
-    //     .then(getDivisions)
+    ajaxRequest
+        .then(getDivisions)
 
-    getDivisions();
+    // getDivisions();
     //getOfficials();
 });
 
@@ -76,6 +76,8 @@ function getDivisions() {
     var $listDivisions = $("<div>");
     $listDivisions.addClass("button-container");
     var divisions = fullData.divisions;
+    var officials = getOfficialsByOffice(fullData.offices);
+    // var officials = fullData.officials;
 
     appendAllOfficialsButton(fullData, $listDivisions);
 
@@ -92,6 +94,7 @@ function getDivisions() {
     });
 
     $dataDiv.append($listDivisions);
+    getOfficials(officials);
 
 }
 
@@ -118,14 +121,21 @@ function addDivisionListener(button, officeArray) {
         var offices = [];
         var officials = [];
         
-        offices = getOffices(officeArray);
-        officials = getOfficialsByOffice(offices);
+        if (officeArray) {
+            offices = getOffices(officeArray);
+        }
+
+        if (offices) {
+            officials = getOfficialsByOffice(offices);
+        }
+
         getOfficials(officials);
 
     });
 }
 
 function getOffices(officeArray) {
+    // console.log(officeArray);
 
     var fullData = JSON.parse(localStorage.getItem("repInfo"));
     // var offices = fullData.offices.filter(isValidOffice);
@@ -135,13 +145,13 @@ function getOffices(officeArray) {
 
         officeArray.forEach(function(trimmedOffice) {
             if (officeIndex === trimmedOffice) {
-                // console.log("officeIndex: " + officeIndex + " trimmedOffice: " + trimmedOffice);
+                console.log(office);
                 offices.push(office);
 
             }
         });
     });
-
+    // console.log(offices);
     return offices;
 }
 
@@ -152,7 +162,7 @@ function getOfficialsByOffice(filteredOfficeArray) {
     fullData.officials.forEach(function(official, officialIndex) {
 
         filteredOfficeArray.forEach(function(office, officeIndex) {
-            if (office["officialIndices"].includes(officialIndex)) {
+            if (office["officialIndices"] && office["officialIndices"].includes(officialIndex)) {
 
                 official["officialIndex"] = officialIndex;
                 officials.push(official);
@@ -169,6 +179,10 @@ function isValidOffice (officeArray) {
     // return Object.keys(fullData.offices).includes(officeArray.values());
 }
 */
+
+// function loadAllOfficials () {
+
+// }
 
 function getOfficials (officialsArray) {
     // clear out officials from content area, if present
@@ -586,3 +600,4 @@ function loadPage () {
 }
 
 loadPage();
+// loadAllOfficials();
