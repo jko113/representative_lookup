@@ -23,14 +23,7 @@ body {
     width: 100%;
     height: 60px;
     align-items: center;
-    /* border: 1px red solid; */
 }
-
-/* .footer {
-    height: 30px;
-    position: initial;
-    bottom: 0px;
-} */
 
 .left-header {
     display: flex;
@@ -106,13 +99,23 @@ body {
 
 .background {
     position: absolute;
-    background-image: url("../images/flag.jpg");
-    background-size: cover; 
     top: 0;
     bottom: 0;
     left: 0;
     opacity: 0.6;
     width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.video-background {
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+    /* Vertical and Horizontal center*/
+    left: 50%; 
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .form-inner-container {
