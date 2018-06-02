@@ -196,8 +196,6 @@ form {
 
 .division-button:hover {
     background-color: rgba(0,200,0,0.3);
-    /* padding-top: 10px;
-    transition: padding 200ms linear; */
 }
 
 .official-box {
@@ -225,10 +223,6 @@ form {
     color: rgb(28,28,28);
     padding: 20px;
 }
-
-/* .article-popup {
-
-} */
 
 .official-box a:link {
     color: darkorange;
