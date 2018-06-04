@@ -18,10 +18,13 @@
                 <h1 class="site-name">RepSearch</h1>
             </div>
         </div>
-
+    
         <div class="right-header">
+            <div class="hamburger-container">
+                <img class="hamburger" src="images/hamburgermenu.png" alt="" data-hamburger-menu>
+            </div>
             <div>
-                <a class="link home" href="index.html">Home</a> 
+                <a class="link home" href="index.html">Home</a>
             </div>
             <div>
                 <a class="link about" href="about.html">About</a>
@@ -32,15 +35,29 @@
                 </a>
             </div>
         </div>
-
     </div>
-    
-    <div class="form-outer-container">
+
+    <div class="hamburger-dropdown hidden" data-hamburger-dropdown>
+        <div>
+            <a class="link home" href="index.html">Home</a>
+        </div>
+        <div>
+            <a class="link about" href="about.html">About</a>
+        </div>
+        <div>
+            <a class="link-github" href="https://github.com/jko113/representative_lookup" target="_blank">
+                <i class="fab fa-github fa-2x"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="form-outer-container" data-form-container>
         <div class="background"> 
             <video class="video-background" autoplay muted loop id="myVideo">
-                <source src="images/flagwaving.mp4" type="video/mp4">
-            </video>           
-        </div>
+                <source src="images/flagwaving20seconds.mp4" type="video/mp4">
+                </video>           
+            </div>
+       
         <div class="form-inner-container">
             <form class="address" data-input="address-form">
                     <div class="form-group street-address">

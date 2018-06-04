@@ -16,11 +16,18 @@ var $street = $("[data-input='street']");
 var $city = $("[data-input='city']");
 var $state = $("[data-input='state']");
 var $dataDiv = $("[data-show]");
+var $formDiv = $("[data-form-container");
+var $hamburgerButton = $("[data-hamburger-menu]");
+var $hamburgerDropDown = $("[data-hamburger-dropdown]")
 
 // attach event listener for submitting the address form
 $addressForm.on("submit", function(event) {
     event.preventDefault();
     var formattedAddress = formatAddress($street.val(), $city.val(), $state.val());
+
+    //shrink video player on address submit to show main contents
+    $formDiv.removeClass("form-outer-container");
+    $formDiv.addClass("form-outer-container-search");
 
     var userAddress = {
         street: $street.val(),
@@ -40,6 +47,21 @@ $addressForm.on("submit", function(event) {
     getDivisions();
     //getOfficials();
 });
+
+$addressForm.on("reset", function(event) {
+    // event.preventDefault();
+
+    $formDiv.addClass("form-outer-container");
+    $formDiv.removeClass("form-outer-container-search");
+    clearOfficials();
+    clearDivisions();
+
+})
+
+$hamburgerButton.on("click", function(event) {
+    $hamburgerDropDown.toggleClass('hidden');
+    // $hamburgerDropDown.toggleClass('hamburger-dropdown');
+})
 
 function formatAddress(unformattedAddress, unformattedCity, unformattedState) {
     var streets = unformattedAddress.split(" ");

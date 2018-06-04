@@ -23,6 +23,23 @@ body {
     width: 100%;
     height: 60px;
     align-items: center;
+    opacity: 1;
+    position: relative;
+    top: 0px;
+}
+
+.hamburger-dropdown {
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    width: 84px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0px;
+    opacity: 1;
+    transform: scaleY(1);
+    transition: transform 1s linear;
 }
 
 .left-header {
@@ -63,6 +80,15 @@ body {
     font-size: 1.5rem;
 }
 
+.hamburger-dropdown .home, .hamburger-dropdown .about {
+    border-right: 0px;
+    border-bottom: rgba(245,245,245, .4) 1px solid;
+}
+
+.hamburger-dropdown .home {
+    border-top: rgba(245,245,245, .4) 1px solid;
+}
+
 .link {
     display: flex;
     justify-content: center;
@@ -84,13 +110,47 @@ body {
     color: rgba(245, 245, 245, .7);
 }
 
-.link:hover, .link-github:hover {
+.hamburger-dropdown .link-github {
+    width: 84px;
+    height: 57px;
+}
+
+.hamburger-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    transition: 0.4s;
+    height: 100%;
+    text-decoration: none;
+    color:rgba(245, 245, 245, .7);
+    width: 60px;
+    margin-right: 15px;
+}
+
+.hamburger {
+    width: 100%;
+    color:rgba(245, 245, 245, .7);
+    transition: 0.4s;
+    height: 100%;
+    padding: 2px 0 2px 0;
+}
+
+.link:hover, .link-github:hover, .hamburger:hover {
     background-color: grey;
     text-decoration: none;
     color: whitesmoke;
+    cursor: pointer;
 }
 
 .form-outer-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.form-outer-container-search {
     width: 100%;
     position: relative;
     padding-top: 25px;
@@ -102,7 +162,7 @@ body {
     top: 0;
     bottom: 0;
     left: 0;
-    opacity: 0.6;
+    opacity: 0.5;
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -122,10 +182,12 @@ body {
     display: flex;
     width: 100%;
     padding: 15px;
+    height: 80%;
     margin-bottom: 5px;
     flex-direction: column;
     align-items: center;
     position: relative;
+    justify-content: center;
     opacity: 1;
 }
 
@@ -266,6 +328,8 @@ form {
 
 .hidden {
     display: none;
+    transform: scaleY(0);
+    transition: transform 0.7s linear;
 }
 
 .hidden-alt {
@@ -280,21 +344,36 @@ form {
 }
 
 .link {
-    width: 40px;
-    font-size: 0.5rem;
+    display: none;
 }
 
 .link-github {
-    font-size: .5em;
-    width: 30px;
+    display: none;
 }
 
 .site-name {
-    font-size: 15px;
+   font-size: 25px;
 }    
 
 .nav-bar {
-    height: 30px;
+    height: 45px;
+}
+
+.hamburger-container {
+    width: 50px;
+}
+
+.hamburger {
+    width: 80%;
+    margin-right: 5px;
+}
+
+.hamburger-dropdown .link, .hamburger-dropdown .link-github {
+    display: flex;
+}
+
+.about {
+    display: none;
 }
 
 }
@@ -308,11 +387,13 @@ form {
 .link {
     width: 60px;
     font-size: 1.0rem;
+    display: flex;
 }
 
 .link-github {
     font-size: .75em;
     width: 45px;
+    display: flex;
 }
 
 .site-name {
@@ -323,6 +404,18 @@ form {
     height: 45px;
 }
 
+.hamburger {
+    display: none;
+}
+
+.hamburger-dropdown .link, .hamburger-dropdown .link-github {
+    display: none;
+}
+
+.hamburger-dropdown {
+    display: none;
+}
+
 }
 
 @media screen and (min-width: 1200px) {
@@ -330,11 +423,13 @@ form {
 .link {
     width: 84px;
     font-size: 1.5rem;
+    display: flex;
 }
 
 .link-github {
     font-size: 1em;
     width: 60px;
+    display: flex;
 }
 
 .site-name {
@@ -343,6 +438,10 @@ form {
 
 .nav-bar {
     height: 60px;
+}
+
+.hamburger {
+    display: none;
 }
 
 }
