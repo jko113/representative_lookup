@@ -337,6 +337,11 @@ function appendSocialMedia(currentOfficial, channels, index) {
     $socialContents.attr("data-social", index);
     $socialContents.addClass("hidden");
 
+    var $X = $("<div>");
+    putX($socialContents, $X);
+    $X.addClass("social");
+    addXListener($X);
+
     channels.forEach(function(channel) {
         var $newChannel = $("<div>");
         var $newChannelLink = $("<a>");
@@ -504,6 +509,9 @@ function populateArticlePopup(index) {
     if (articles.length) {
         var $X = $("<div>");
         putX($articlePopup, $X);
+        if (!$X.hasClass("times")) {
+            $X.addClass("times");
+        }
         addXListener($X);
 
         articles.forEach(function(article) {
@@ -539,16 +547,25 @@ function addXListener(X) {
     X.on("click", function(event) {
         event.preventDefault();
         // console.log("clicked X");
-        hidePopup();
+        if (X.hasClass("social")) {
+            hideSocialPopup();
+        } else if (X.hasClass("times")) {
+            hideArticlePopup();
+        }
     });
 }
 
-function hidePopup() {
-    // console.log("cleared popup");
+function hideArticlePopup() {
 
     var $popup = $(".article-popup");
-    // ($popup).remove();
     $popup.removeClass("article-popup");
+    $popup.addClass("hidden");
+}
+
+function hideSocialPopup() {
+
+    var $popup = $(".social-popup");
+    $popup.removeClass("social-popup");
     $popup.addClass("hidden");
 }
 
