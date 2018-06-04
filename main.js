@@ -521,13 +521,14 @@ function populateArticlePopup(index) {
     var $articlePopup = $(".article-popup");
     $articlePopup.empty();
 
+    var $X = $("<div>");
+    putX($articlePopup, $X);
+    if (!$X.hasClass("times")) {
+        $X.addClass("times");
+    }
+    addXListener($X);
+    
     if (articles.length) {
-        var $X = $("<div>");
-        putX($articlePopup, $X);
-        if (!$X.hasClass("times")) {
-            $X.addClass("times");
-        }
-        addXListener($X);
 
         articles.forEach(function(article) {
             $newArticle = $("<div>");
