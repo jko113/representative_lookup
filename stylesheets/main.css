@@ -1,6 +1,9 @@
 html {
     box-sizing: border-box;
+    /* background-color: rgb(38, 38, 38); */
 }
+
+button:focus {outline:0;}
 
 *,
 *:before,
@@ -13,7 +16,8 @@ body {
     width: 100%;
     height: 100%;
     font-size: 100%;
-    background-color: ghostwhite;
+    /* background-color: ghostwhite; */
+    background-color: rgb(38, 38, 38);
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -72,6 +76,7 @@ body {
     text-decoration: none;
     color:rgba(245, 245, 245, .7);
     width: 84px;
+    font-size: 0.2rem;
 }
     
 .link-github {
@@ -92,8 +97,8 @@ body {
 
 .form-outer-container {
     width: 100%;
+    height: 100%;
     position: relative;
-    padding-top: 25px;
     padding-bottom: 25px;
 }
 
@@ -102,10 +107,13 @@ body {
     top: 0;
     bottom: 0;
     left: 0;
-    opacity: 0.6;
+    /* opacity: 0.6; */
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
+    background-image: url(../images/2.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 .video-background {
@@ -121,7 +129,7 @@ body {
 .form-inner-container {
     display: flex;
     width: 100%;
-    padding: 15px;
+    padding-top: 150px;
     margin-bottom: 5px;
     flex-direction: column;
     align-items: center;
@@ -152,8 +160,8 @@ form {
 
 .form-row {
     display: flex;
-    justify-content: flex-start;
-    width: 100%;
+    justify-content: space-between;
+    width: 300px;
     margin:0;
     padding: 0;
 }
@@ -161,8 +169,6 @@ form {
 .submit-button-container {
     display: flex;
     width: 45%;
-    margin-top: 15px;
-    margin-right: 10px;
 }
 
 .form-button button {
@@ -174,6 +180,17 @@ form {
     margin-top: 3px;
 }
 
+label {
+    color: rgb(38, 38, 38);
+    font-size: 11px;
+    padding-bottom: 10px;
+}
+
+.form-control {
+    width: 300px;
+    margin-bottom: 10px;
+}
+
 .list-officials {
     display: flex;
     flex-wrap: wrap;
@@ -183,38 +200,54 @@ form {
 }
 
 .button-container {
-    padding-top: 10px;
     display: flex;
     justify-content: center;
 }
 
 .division-button {
-    border-radius: 15px 15px 0 0;
+    /* border-radius: 15px 15px 0 0; */
     padding: 5px;
     background-color: rgba(0,0,0,0.1);
+    color: white;
+    font-size: 11px;
 }
 
 .division-button:hover {
-    background-color: rgba(0,200,0,0.3);
+    /* background-color: rgba(0,200,0,0.3); */
+    background-color: darkorange;
+}
+
+.btn-primary {
+    background-color: darkorange;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: rgb(38, 38, 38);
+    border: none;
+}
+
+.btn:focus {
+    outline:0 !important;
 }
 
 .official-box {
     background-color: #333;
     color: whitesmoke;
-    border: 1px solid red;
-    padding: 15px;
+    padding: 25px;
     /* flex: 0 0 20%; */
     flex: 1;
     flex-grow: 0;
     margin: 5px;
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
-    transition: 0.4s
+    /* border-radius: 10px; */
+    transition: 0.4s;
+    font-size: 11px;
 }
 
 .official-box:hover {
-    border: blue 1px solid;
+    outline: darkorange 1px solid;
     background-color: rgb(73, 70, 70);
 }
 
@@ -234,7 +267,7 @@ form {
 }
 
 .official-imageUrl-container {
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -242,6 +275,7 @@ form {
     width: 200px;
     height: 250px;
     overflow: hidden;
+    box-shadow: 4px 4px 8px rgba(28,28,28,0.3);
 }
 
 .official-imageUrl {
@@ -251,7 +285,6 @@ form {
 .official-image {
     width: 200px;
     max-height: 100%;
-    border-radius: 50%;
 }
 
 .no-official-image {
@@ -289,6 +322,7 @@ form {
 
 .nav-bar {
     height: 30px;
+    position: relative;
 }
 
 }
@@ -301,7 +335,7 @@ form {
 
 .link {
     width: 60px;
-    font-size: 1.0rem;
+    font-size: 0.7rem;
 }
 
 .link-github {
@@ -317,13 +351,30 @@ form {
     height: 45px;
 }
 
+.button-container {
+    padding-top: 10px;
+}
+
+.division-button {
+    border: none;
+    border-bottom: 1px solid white;
+    margin: 10px;
+    background-color: transparent;
+}
+
+.division-button:hover {
+    border-bottom: 1px solid darkorange;
+    background-color: transparent;
+    color: darkorange;
+}
+
 }
 
 @media screen and (min-width: 1200px) {
 
 .link {
-    width: 84px;
-    font-size: 1.5rem;
+    width: 120px;
+    font-size: 0.9rem;
 }
 
 .link-github {

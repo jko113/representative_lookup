@@ -39,6 +39,12 @@ $addressForm.on("submit", function(event) {
 
     // getDivisions();
     //getOfficials();
+    console.log($(".form-outer-container").offset().top)
+    console.log($(".form-outer-container").outerHeight())
+
+    $('html, body').animate({
+        scrollTop: $(".form-outer-container").offset().top + $(".form-outer-container").outerHeight()
+    }, 1000);
 });
 
 function formatAddress(unformattedAddress, unformattedCity, unformattedState) {
@@ -599,5 +605,5 @@ function loadPage () {
     }
 }
 
-loadPage();
-// loadAllOfficials();
+// loadPage();
+// // loadAllOfficials();
