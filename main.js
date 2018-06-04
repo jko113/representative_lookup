@@ -35,7 +35,7 @@ $addressForm.on("submit", function(event) {
   
     var formattedAddress = formatAddress(userAddress["street"], userAddress["city"], userAddress["state"]);
 
-    if (userAddress["street"] && userAddress["city"] && userAddress["state"]) {
+    if (userAddress["city"]) {
 
         var ajaxRequest = $.get(MISSING_ADDRESS + formattedAddress, function(data) {
             localStorage.setItem("repInfo", JSON.stringify(data));
@@ -53,13 +53,7 @@ $addressForm.on("submit", function(event) {
             scrollTop: $(".form-outer-container").outerHeight()
         }, 1000);
     } else {
-        if (!userAddress["street"]) {
-            alert("Please enter a valid street address.");
-        } else if (!userAddress["city"]) {
-            alert("Please enter a valid city.");
-        } else {
-            alert("Please enter a valid state.");
-        }
+        alert("Please enter a valid city.");
     }
 });
 
