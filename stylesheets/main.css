@@ -14,6 +14,7 @@ button:focus {
 
 html,
 body {
+    min-width: 360px;
     width: 100%;
     height: 100%;
     font-size: 100%;
@@ -22,11 +23,14 @@ body {
 }
 
 .nav-bar, .footer {
+    min-width: 360px;
     display: flex;
+    position: relative;
     background-color: #333;
     width: 100%;
     height: 60px;
     align-items: center;
+    z-index: 1;
 }
 
 .left-header {
@@ -68,7 +72,7 @@ body {
 }
 
 .link {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     transition: 0.4s;
@@ -79,20 +83,65 @@ body {
     font-size: 0.2rem;
 }
     
-.link-github {
-    width: 60px;
+.link-github, .hamburger-container {
+    width: 45px;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.4s;
     color: rgba(245, 245, 245, .7);
 }
 
-.link:hover, .link-github:hover {
+.link-github {
+    display:none;
+}
+
+.hamburger-container {
+    margin-right: 8px;
+}
+
+.link:hover, .link-github:hover, .hamburger-container:hover {
     background-color: grey;
     text-decoration: none;
     color: rgb(230,245,247);
+}
+
+.hamburger-dropdown {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    float: right;
+    right: 0px;
+    width: 90px;
+    color:rgba(245, 245, 245, .7);
+    background-color: #333;
+    z-index: 1;
+    border-top: rgba(245, 245, 245, .4) 1px solid;
+    transform: scaleY(1);
+    transform-origin: top;
+    transition: all 150ms linear;
+}
+
+.hamburger-item, .hamburger-item-github {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: rgba(245, 245, 245, .7);
+    border-bottom: rgba(245, 245, 245, .4) 1px solid;
+    text-decoration: none;
+    padding: 14px 0px;
+    margin: 0px;
+}
+
+.hamburger-item-github {
+    border-bottom: 0;
+}
+
+.hamburger-item:hover, .hamburger-item-github:hover {
+    background-color: grey;
+    color: rgb(230, 245, 247);
+    text-decoration: none;
 }
 
 .form-outer-container {
@@ -283,12 +332,21 @@ label {
     display: none;
 }
 
+.hidden-menu {
+    transform: scaleY(0);
+    transition: all 150ms linear;
+}
+
 .hidden-alt {
     z-index: -1;
     opacity: 0;
 }
 
 @media screen and (min-width: 360px) {
+
+.hamburger-container, .fa-bars {
+    display: flex;
+}
 
 .button-container {
     flex-direction: column;
@@ -297,25 +355,35 @@ label {
 .link {
     width: 40px;
     font-size: 0.5rem;
+    display: none;
 }
 
 .link-github {
     font-size: .5em;
     width: 30px;
+    display: none;
 }
 
 .site-name {
-    font-size: 15px;
+    font-size: 25px;
 }    
 
 .nav-bar {
-    height: 30px;
+    height: 45px;
     position: relative;
 }
 
 }
 
 @media screen and (min-width: 768px) {
+
+.hamburger-dropdown {
+    display: none;
+}
+
+.hamburger-container, .fa-bars {
+    display: none;
+}
 
 .button-container {
     flex-direction: row;
@@ -324,11 +392,13 @@ label {
 .link {
     width: 60px;
     font-size: 0.7rem;
+    display: flex;
 }
 
 .link-github {
     font-size: .75em;
     width: 45px;
+    display: flex;
 }
 
 .site-name {
@@ -360,14 +430,24 @@ label {
 
 @media screen and (min-width: 1200px) {
 
+.hamburger-dropdown {
+    display: none;
+}
+
+.hamburger-container, .fa-bars {
+    display: none;
+}
+
 .link {
     width: 120px;
     font-size: 0.9rem;
+    display: flex;
 }
 
 .link-github {
     font-size: 1em;
     width: 60px;
+    display: flex;
 }
 
 .site-name {

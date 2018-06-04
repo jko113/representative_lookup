@@ -16,6 +16,8 @@ var $street = $("[data-input='street']");
 var $city = $("[data-input='city']");
 var $state = $("[data-input='state']");
 var $dataDiv = $("[data-show]");
+var $hamburgerIcon = $("[data-hamburger-icon]");
+var $hamburgerDropdown = $("[data-hamburger-dropdown]");
 
 // attach event listener for submitting the address form
 $addressForm.on("submit", function(event) {
@@ -45,6 +47,10 @@ $addressForm.on("submit", function(event) {
     $('html, body').animate({
         scrollTop: $(".form-outer-container").offset().top + $(".form-outer-container").outerHeight()
     }, 1000);
+});
+
+$hamburgerIcon.on("click", function(event) {
+    $hamburgerDropdown.toggleClass("hidden-menu");
 });
 
 function formatAddress(unformattedAddress, unformattedCity, unformattedState) {
