@@ -337,6 +337,11 @@ function appendSocialMedia(currentOfficial, channels, index) {
     $socialContents.attr("data-social", index);
     $socialContents.addClass("hidden");
 
+    var $X = $("<div>");
+    putX($socialContents, $X);
+    $X.addClass("social");
+    addXListener($X);
+
     channels.forEach(function(channel) {
         var $newChannel = $("<div>");
         var $newChannelLink = $("<a>");
@@ -502,9 +507,13 @@ function populateArticlePopup(index) {
     $articlePopup.empty();
 
     if (articles.length) {
-        var X = $("<div>");
-        X.text("X");
-        $articlePopup.append(X);
+        var $X = $("<div>");
+        putX($articlePopup, $X);
+        if (!$X.hasClass("times")) {
+            $X.addClass("times");
+        }
+        addXListener($X);
+
         articles.forEach(function(article) {
             $newArticle = $("<div>");
             var $newArticleLink = $("<a>");
@@ -523,6 +532,41 @@ function populateArticlePopup(index) {
         $noArticle.text("No articles found.");
         $articlePopup.append($noArticle);
     }
+}
+
+function putX(popup, X) {
+    X.addClass("close-box");
+    var $XImage = $("<i>");
+    $XImage.addClass("fa fa-times");
+
+    X.append($XImage);
+    popup.append(X);
+}
+
+function addXListener(X) {
+    X.on("click", function(event) {
+        event.preventDefault();
+        // console.log("clicked X");
+        if (X.hasClass("social")) {
+            hideSocialPopup();
+        } else if (X.hasClass("times")) {
+            hideArticlePopup();
+        }
+    });
+}
+
+function hideArticlePopup() {
+
+    var $popup = $(".article-popup");
+    $popup.removeClass("article-popup");
+    $popup.addClass("hidden");
+}
+
+function hideSocialPopup() {
+
+    var $popup = $(".social-popup");
+    $popup.removeClass("social-popup");
+    $popup.addClass("hidden");
 }
 
 function storeArticles(data) {
@@ -622,7 +666,7 @@ function loadPage () {
     }
 }
 
-// loadPage();
+loadPage();
 // // loadAllOfficials();
 $clear.on("click", function() {
     clearOfficials();
