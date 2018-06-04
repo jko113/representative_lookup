@@ -16,6 +16,8 @@ var $street = $("[data-input='street']");
 var $city = $("[data-input='city']");
 var $state = $("[data-input='state']");
 var $dataDiv = $("[data-show]");
+var $hamburgerIcon = $("[data-hamburger-icon]");
+var $hamburgerDropdown = $("[data-hamburger-dropdown]");
 var $clear = $("[data-clear]");
 
 // attach event listener for submitting the address form
@@ -59,6 +61,10 @@ $addressForm.on("submit", function(event) {
             alert("Please enter a valid state.");
         }
     }
+});
+
+$hamburgerIcon.on("click", function(event) {
+    $hamburgerDropdown.toggleClass("hidden-menu");
 });
 
 function formatAddress(unformattedAddress, unformattedCity, unformattedState) {

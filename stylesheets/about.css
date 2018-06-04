@@ -66,6 +66,22 @@ body {
     .about-creators {
         display: block;
     }
+
+    .hamburger-container, .fa-bars {
+        display: none;
+    }
+
+    .link {
+        width: 60px;
+        font-size: 0.7rem;
+        display: flex;
+    }
+
+    .link-github {
+        font-size: .75em;
+        width: 45px;
+        display: flex;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -87,5 +103,37 @@ body {
     .headshot {
         max-height: 1000px;
         max-width: 200px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .hamburger-dropdown {
+        display: none;
+    }
+    .hamburger-container,
+    .fa-bars {
+        display: none;
+    }
+    .link {
+        width: 120px;
+        font-size: 0.9rem;
+        display: flex;
+    }
+    .link-github {
+        font-size: 1em;
+        width: 60px;
+        display: flex;
+    }
+    .site-name {
+        font-size: 40px;
+    }
+    .nav-bar {
+        height: 60px;
+    }
+
+    .headshots-container {
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding: 0;
     }
 }
