@@ -194,6 +194,15 @@ form {
     width: 200px;
 }
 
+/* input:invalid {
+    border-color: red;
+}
+
+input,
+input:valid {
+    border-color: #ccc;
+} */
+
 .form-row {
     display: flex;
     justify-content: space-between;
@@ -287,6 +296,7 @@ label {
     background: lightgray;
     color: rgb(28,28,28);
     padding: 0 20px 15px 20px;
+    /* overflow: scroll; */
 }
 
 .close-box {
