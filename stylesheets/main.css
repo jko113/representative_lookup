@@ -193,7 +193,6 @@ label {
 }
 
 .division-button {
-    /* border-radius: 15px 15px 0 0; */
     padding: 5px;
     background-color: rgba(0,0,0,0.1);
     color: white;
@@ -201,7 +200,6 @@ label {
 }
 
 .division-button:hover {
-    /* background-color: rgba(0,200,0,0.3); */
     background-color: darkorange;
 }
 
@@ -223,13 +221,11 @@ label {
     background-color: #333;
     color: whitesmoke;
     padding: 25px;
-    /* flex: 0 0 20%; */
     flex: 1;
     flex-grow: 0;
     margin: 5px;
     display: flex;
     flex-direction: column;
-    /* border-radius: 10px; */
     transition: 0.4s;
     font-size: 11px;
 }
@@ -242,7 +238,17 @@ label {
 .social-popup, .article-popup {
     background: lightgray;
     color: rgb(28,28,28);
-    padding: 20px;
+    padding: 0 20px 20px 20px;
+}
+
+.close-box {
+    position: relative;
+    top: 5px;
+    left: -10px;
+}
+
+.fa-times {
+    cursor: pointer;
 }
 
 .official-box a:link {

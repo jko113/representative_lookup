@@ -502,9 +502,10 @@ function populateArticlePopup(index) {
     $articlePopup.empty();
 
     if (articles.length) {
-        var X = $("<div>");
-        X.text("X");
-        $articlePopup.append(X);
+        var $X = $("<div>");
+        putX($articlePopup, $X);
+        addXListener($X);
+
         articles.forEach(function(article) {
             $newArticle = $("<div>");
             var $newArticleLink = $("<a>");
@@ -523,6 +524,32 @@ function populateArticlePopup(index) {
         $noArticle.text("No articles found.");
         $articlePopup.append($noArticle);
     }
+}
+
+function putX(popup, X) {
+    X.addClass("close-box");
+    var $XImage = $("<i>");
+    $XImage.addClass("fa fa-times");
+
+    X.append($XImage);
+    popup.append(X);
+}
+
+function addXListener(X) {
+    X.on("click", function(event) {
+        event.preventDefault();
+        // console.log("clicked X");
+        hidePopup();
+    });
+}
+
+function hidePopup() {
+    // console.log("cleared popup");
+
+    var $popup = $(".article-popup");
+    // ($popup).remove();
+    $popup.removeClass("article-popup");
+    $popup.addClass("hidden");
 }
 
 function storeArticles(data) {
@@ -622,7 +649,7 @@ function loadPage () {
     }
 }
 
-// loadPage();
+loadPage();
 // // loadAllOfficials();
 $clear.on("click", function() {
     clearOfficials();
