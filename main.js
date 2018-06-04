@@ -631,7 +631,8 @@ function prependPhoto(currentOfficial, item) {
             }
         });
         $imageUrl.attr("href", "https://www.google.com/search?tbm=isch&q=" + formattedName);
-        $image.attr("src", "images/no-image-available.jpg");
+        // $image.attr("src", "images/no-image-available.jpg");
+        $image.attr("src", "images/No_image_2.gif");
         $imageContainer.append($imageUrl);
         $imageContainer.addClass("official-imageUrl-container");
         currentOfficial.prepend($imageContainer);
