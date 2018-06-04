@@ -177,7 +177,6 @@ body {
 form {
     display:flex;
     flex-direction: column;
-    width: 30%;
     min-width: 280px;
     position: relative;
     opacity: 1;

@@ -45,7 +45,7 @@ $addressForm.on("submit", function(event) {
   
     var formattedAddress = formatAddress(userAddress["street"], userAddress["city"], userAddress["state"]);
 
-    if (userAddress["street"] && userAddress["city"] && userAddress["state"]) {
+    if (userAddress["city"]) {
 
         var ajaxRequest = $.get(MISSING_ADDRESS + formattedAddress, function(data) {
             localStorage.setItem("repInfo", JSON.stringify(data));
@@ -62,16 +62,10 @@ $addressForm.on("submit", function(event) {
         $('html, body').animate({
             scrollTop: $(".form-outer-container").outerHeight()
         }, 1000);
-    } 
-    // else {
-    //     if (!userAddress["street"]) {
-    //         alert("Please enter a valid street address.");} 
-    //     else if (!userAddress["city"]) {
-    //         alert("Please enter a valid city.");
-    //     } else {
-    //         alert("Please enter a valid state.");
-    //     }
-    // }
+      
+    } else {
+        alert("Please enter a valid city.");
+    }
 });
 
 $hamburgerIcon.on("click", function(event) {
@@ -646,7 +640,8 @@ function prependPhoto(currentOfficial, item) {
             }
         });
         $imageUrl.attr("href", "https://www.google.com/search?tbm=isch&q=" + formattedName);
-        $image.attr("src", "images/no-image-available.jpg");
+        // $image.attr("src", "images/no-image-available.jpg");
+        $image.attr("src", "images/No_image_2.gif");
         $imageContainer.append($imageUrl);
         $imageContainer.addClass("official-imageUrl-container");
         currentOfficial.prepend($imageContainer);
