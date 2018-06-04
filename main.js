@@ -20,6 +20,16 @@ var $hamburgerIcon = $("[data-hamburger-icon]");
 var $hamburgerDropdown = $("[data-hamburger-dropdown]");
 var $clear = $("[data-clear]");
 
+//form validation custom message for state
+// var cityForm = document.querySelector("[data-input=`city`");
+// cityForm.addEventListener("input", function (event) {
+//     if (cityForm.validity.valueMissing) {
+//         cityForm.setCustomValidity("Please enter a city");
+//     } else {
+//         cityForm.setCustomValidity("");
+//     }
+// });
+
 // attach event listener for submitting the address form
 $addressForm.on("submit", function(event) {
     event.preventDefault();
@@ -52,15 +62,16 @@ $addressForm.on("submit", function(event) {
         $('html, body').animate({
             scrollTop: $(".form-outer-container").outerHeight()
         }, 1000);
-    } else {
-        if (!userAddress["street"]) {
-            alert("Please enter a valid street address.");
-        } else if (!userAddress["city"]) {
-            alert("Please enter a valid city.");
-        } else {
-            alert("Please enter a valid state.");
-        }
-    }
+    } 
+    // else {
+    //     if (!userAddress["street"]) {
+    //         alert("Please enter a valid street address.");} 
+    //     else if (!userAddress["city"]) {
+    //         alert("Please enter a valid city.");
+    //     } else {
+    //         alert("Please enter a valid state.");
+    //     }
+    // }
 });
 
 $hamburgerIcon.on("click", function(event) {
@@ -393,8 +404,12 @@ function createTwitterListener(link, channel) {
         getTwitterUrl(channel)
             .then(function (data) {
                 embeddedTimeLine = data.html;
-                link.append(embeddedTimeLine);
-                link.css("overflow-y","scroll");
+                var $timelineDiv = $("<div>")
+                $timelineDiv.append(embeddedTimeLine);
+                link.append($timelineDiv);
+                $timelineDiv.css("overflow-y","scroll");
+                $timelineDiv.css("height","200");
+                $timelineDiv.css("margin","2px 0px");
                 link.off();
             })
     })
@@ -672,7 +687,7 @@ function loadPage () {
     }
 }
 
-loadPage();
+// loadPage();
 // // loadAllOfficials();
 $clear.on("click", function() {
     clearOfficials();
