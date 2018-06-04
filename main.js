@@ -16,6 +16,7 @@ var $street = $("[data-input='street']");
 var $city = $("[data-input='city']");
 var $state = $("[data-input='state']");
 var $dataDiv = $("[data-show]");
+var $clear = $("[data-clear]");
 
 // attach event listener for submitting the address form
 $addressForm.on("submit", function(event) {
@@ -607,3 +608,7 @@ function loadPage () {
 
 // loadPage();
 // // loadAllOfficials();
+$clear.on("click", function() {
+    clearOfficials();
+    clearDivisions();
+});
