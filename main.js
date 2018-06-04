@@ -18,35 +18,49 @@ var $state = $("[data-input='state']");
 var $dataDiv = $("[data-show]");
 var $hamburgerIcon = $("[data-hamburger-icon]");
 var $hamburgerDropdown = $("[data-hamburger-dropdown]");
+var $clear = $("[data-clear]");
 
 // attach event listener for submitting the address form
 $addressForm.on("submit", function(event) {
     event.preventDefault();
-    var formattedAddress = formatAddress($street.val(), $city.val(), $state.val());
-
+    
     var userAddress = {
         street: $street.val(),
+        // city: $city.val() ? $city.val(): "none",
         city: $city.val(),
         state: $state.val()
     };
 
     localStorage.setItem("userAddress", JSON.stringify(userAddress));
+  
+    var formattedAddress = formatAddress(userAddress["street"], userAddress["city"], userAddress["state"]);
 
-    var ajaxRequest = $.get(MISSING_ADDRESS + formattedAddress, function(data) {
-        localStorage.setItem("repInfo", JSON.stringify(data));
-    });
+    if (userAddress["street"] && userAddress["city"] && userAddress["state"]) {
 
-    ajaxRequest
+        var ajaxRequest = $.get(MISSING_ADDRESS + formattedAddress, function(data) {
+            localStorage.setItem("repInfo", JSON.stringify(data));
+        });
+        
+        ajaxRequest
         .then(getDivisions)
-
-    // getDivisions();
-    //getOfficials();
-    console.log($(".form-outer-container").offset().top)
-    console.log($(".form-outer-container").outerHeight())
-
-    $('html, body').animate({
-        scrollTop: $(".form-outer-container").offset().top + $(".form-outer-container").outerHeight()
-    }, 1000);
+        
+        // getDivisions();
+        //getOfficials();
+        // console.log($(".form-outer-container").offset().top)
+        // console.log($(".form-outer-container").outerHeight())
+        
+        $('html, body').animate({
+            scrollTop: $(".form-outer-container").outerHeight()
+        }, 1000);
+    } else {
+        if (!userAddress["street"]) {
+            alert("Please enter a valid street address.");
+        } else if (!userAddress["city"]) {
+            alert("Please enter a valid city.");
+        } else {
+            alert("Please enter a valid state.");
+        }
+    }
 });
 
 $hamburgerIcon.on("click", function(event) {
@@ -494,6 +508,9 @@ function populateArticlePopup(index) {
     $articlePopup.empty();
 
     if (articles.length) {
+        var X = $("<div>");
+        X.text("X");
+        $articlePopup.append(X);
         articles.forEach(function(article) {
             $newArticle = $("<div>");
             var $newArticleLink = $("<a>");
@@ -613,3 +630,7 @@ function loadPage () {
 
 // loadPage();
 // // loadAllOfficials();
+$clear.on("click", function() {
+    clearOfficials();
+    clearDivisions();
+});
