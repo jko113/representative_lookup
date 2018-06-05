@@ -301,8 +301,9 @@ label {
 
 .close-box {
     position: relative;
-    top: 5px;
-    left: -10px;
+    top: 3px;
+    right: -12px;
+    text-align: right;
 }
 
 .fa-times {
@@ -397,7 +398,7 @@ label {
 }
 
 .hamburger-container, .fa-bars {
-    display: none;
+    visibility: hidden;
 }
 
 .button-container {
@@ -450,7 +451,7 @@ label {
 }
 
 .hamburger-container, .fa-bars {
-    display: none;
+    visibility: hidden;
 }
 
 .link {
