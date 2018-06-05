@@ -28,7 +28,7 @@ body {
     position: relative;
     background-color: #333;
     width: 100%;
-    height: 60px;
+    height: 45px;
     align-items: center;
     z-index: 1;
 }
@@ -60,6 +60,7 @@ body {
     margin-left: 15px;
     margin-bottom: 0;
     padding-left: 0px;
+    font-size: 20px;
 }
 
 .home, .about {
@@ -166,12 +167,38 @@ body {
 .form-inner-container {
     display: flex;
     width: 100%;
-    padding-top: 150px;
     margin-bottom: 5px;
     flex-direction: column;
     align-items: center;
     position: relative;
     opacity: 1;
+}
+
+.welcome-text-container {
+    font-family: 'Lato', sans-serif;
+    min-width: 320px;
+    background-color: rgba(51,51,51,0.7);
+    color: rgb(230,245,247);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 75px 0 50px 0;
+    height: 100px;
+}
+
+.welcome {
+    font-size: 24px;
+    padding: 10px 0 5px 0;
+}
+
+.welcome-sub {
+    font-size: 12px;
+}
+
+.welcome-sub2 {
+    padding-top: 0px;
+    font-size: 11px;
 }
 
 form {
@@ -360,119 +387,164 @@ label {
 
 @media screen and (min-width: 360px) {
 
-.hamburger-container, .fa-bars {
-    display: flex;
-}
+    .hamburger-container, .fa-bars {
+        display: flex;
+    }
 
-.button-container {
-    flex-direction: column;
-}
+    .button-container {
+        flex-direction: column;
+    }
 
-.link {
-    width: 40px;
-    font-size: 0.5rem;
-    display: none;
-}
+    .link {
+        width: 40px;
+        font-size: 0.5rem;
+        display: none;
+    }
 
-.link-github {
-    font-size: .5em;
-    width: 30px;
-    display: none;
-}
+    .link-github {
+        font-size: .5em;
+        width: 30px;
+        display: none;
+    }
 
-.site-name {
-    font-size: 25px;
-    font-family: "Fira Sans", sans-serif;
-}    
+    .site-name {
+        font-size: 25px;
+        font-family: "Fira Sans", sans-serif;
+    }    
 
-.nav-bar {
-    height: 45px;
-    position: relative;
-}
+    .nav-bar {
+        height: 45px;
+        position: relative;
+    }
+
+    .welcome-text-container {
+        width: 320px;
+        margin: 90px 0 70px 0;
+    }
+    
+    .welcome {
+        font-size: 24px;
+    }
+    
+    .welcome-sub {
+        font-size: 12px;
+    }
+    
+    .welcome-sub2 {
+        padding-top: 0;
+        font-size: 11px;
+    }
 
 }
 
 @media screen and (min-width: 768px) {
 
-.hamburger-dropdown {
-    display: none;
-}
+    .hamburger-dropdown {
+        display: none;
+    }
 
-.hamburger-container, .fa-bars {
-    visibility: hidden;
-}
+    .hamburger-container, .fa-bars {
+        visibility: hidden;
+    }
 
-.button-container {
-    flex-direction: row;
-}
+    .button-container {
+        flex-direction: row;
+    }
 
-.link {
-    width: 60px;
-    font-size: 0.7rem;
-    display: flex;
-}
+    .link {
+        width: 60px;
+        font-size: 0.7rem;
+        display: flex;
+    }
 
-.link-github {
-    font-size: .75em;
-    width: 45px;
-    display: flex;
-}
+    .link-github {
+        font-size: .75em;
+        width: 45px;
+        display: flex;
+    }
 
-.site-name {
-    font-size: 25px;
-}
+    .site-name {
+        font-size: 25px;
+    }
 
-.nav-bar {
-    height: 45px;
-}
+    .nav-bar {
+        height: 45px;
+    }
 
-.button-container {
-    padding-top: 10px;
-}
+    .button-container {
+        padding-top: 10px;
+    }
 
-.division-button {
-    border: none;
-    border-bottom: 1px solid white;
-    margin: 10px;
-    background-color: transparent;
-}
+    .division-button {
+        border: none;
+        border-bottom: 1px solid white;
+        margin: 10px;
+        background-color: transparent;
+    }
 
-.division-button:hover {
-    border-bottom: 1px solid darkorange;
-    background-color: transparent;
-    color: darkorange;
-}
+    .division-button:hover {
+        border-bottom: 1px solid darkorange;
+        background-color: transparent;
+        color: darkorange;
+    }
 
+    .welcome-text-container {
+        height: 130px;
+        width: 400px;
+        margin: 75px 0 50px 0;
+    }
+
+    .welcome {
+        font-size: 32px;
+        padding: 20px 0 5px 0;
+    }
+
+    .welcome-sub {
+        font-size: 13px;
+        padding-bottom: 0;
+    }
+
+    .welcome-sub2 {
+        font-size: 12px;
+    }
 }
 
 @media screen and (min-width: 1200px) {
 
-.hamburger-dropdown {
-    display: none;
-}
+    .hamburger-dropdown {
+        display: none;
+    }
 
-.hamburger-container, .fa-bars {
-    visibility: hidden;
-}
+    .hamburger-container, .fa-bars {
+        visibility: hidden;
+    }
 
-.link {
-    width: 120px;
-    font-size: 0.9rem;
-    display: flex;
-}
+    .link {
+        width: 120px;
+        font-size: 0.9rem;
+        display: flex;
+    }
 
-.link-github {
-    font-size: 1em;
-    width: 60px;
-    display: flex;
-}
+    .link-github {
+        font-size: 1em;
+        width: 60px;
+        display: flex;
+    }
 
-.site-name {
-    font-size: 40px;
-}
+    .site-name {
+        font-size: 40px;
+    }
 
-.nav-bar {
-    height: 60px;
-}
+    .nav-bar {
+        height: 60px;
+    }
 
+    .welcome-text-container {
+        width: 450px;
+    }
+
+    .welcome {
+        font-size: 36px;
+        padding-top: 15px;
+    }
 }
