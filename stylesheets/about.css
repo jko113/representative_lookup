@@ -17,11 +17,18 @@ body {
 .about-creators {
     text-align: center;
     display: none;
+    padding: 20px 0;
+}
+
+.name {
+    color: darkorange;
+    font-size: 12px;
 }
 
 .about-text p {
-    padding: 0 20px;
+    padding: 20px 60px;
     text-align: justify;
+    font-size: 11px;
 }
 
 .headshots-container {
