@@ -394,19 +394,31 @@ function checkSocialType(channel) {
 }
 
 function createTwitterListener(link, channel) {
-    link.on('click', function (event) {
+    link.on("click", function (event) {
         event.preventDefault();
         getTwitterUrl(channel)
             .then(function (data) {
                 embeddedTimeLine = data.html;
                 var $timelineDiv = $("<div>")
+                $timelineDiv.addClass("timeline-container")
                 $timelineDiv.append(embeddedTimeLine);
                 link.append($timelineDiv);
                 $timelineDiv.css("overflow-y","scroll");
                 $timelineDiv.css("height","200");
                 $timelineDiv.css("margin","2px 0px");
                 link.off();
+                removeTwitterTimeline(link,$timelineDiv, channel); 
             })
+        })
+    }
+    
+    function removeTwitterTimeline(link, $timelineDiv,channel) {
+        link.on("click", function (event) {
+            if ($(".timeline-container.length")) {
+                $(".timeline-container").remove();
+            }
+        event.preventDefault();
+        createTwitterListener(link,channel);
     })
 }
 
@@ -584,6 +596,9 @@ function hideSocialPopup() {
     var $popup = $(".social-popup");
     $popup.removeClass("social-popup");
     $popup.addClass("hidden");
+    var $twitterTimeline = $(".timeline-container");
+    $twitterTimeline.remove();
+
 }
 
 function storeArticles(data) {
