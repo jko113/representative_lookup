@@ -55,16 +55,13 @@ body {
     padding: 20px 0;
     max-height: 240px;
     border-radius: 50%;
+    max-width: 177px;
 }
 
 @media screen and (min-width: 360px) {
 
     .headshots-container {
         flex-direction: column;
-    }
-
-    .headshot-photo {
-        max-width: 177px;
     }
 }
 
