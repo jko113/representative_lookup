@@ -63,9 +63,10 @@ $addressForm.on("submit", function(event) {
             scrollTop: $(".form-outer-container").outerHeight()
         }, 1000);
       
-    } else {
-        alert("Please enter a valid city.");
-    }
+    } 
+    // else {
+    //     alert("Please enter a valid city.");
+    // }
 });
 
 $hamburgerIcon.on("click", function(event) {
