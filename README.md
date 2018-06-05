@@ -10,7 +10,7 @@ RepSearch is an application for obtaining information about elected officials in
 <br>
 [![Social Media](https://raw.githubusercontent.com/jko113/repsearch/master/images/social-media.gif)](https://www.youtube.com/watch?v=3jyz42O0Kk)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+[Click here for the full RepSearch demo!](https://www.youtube.com/watch?v=3jyz42O0Kk)
 
 ## Technologies
 
