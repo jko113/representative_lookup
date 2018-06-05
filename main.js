@@ -63,7 +63,8 @@ $addressForm.on("submit", function(event) {
             scrollTop: $(".form-outer-container").outerHeight()
         }, 1000);
       
-    } else {
+    } 
+    else {
         alert("Please enter a valid city.");
     }
 });
