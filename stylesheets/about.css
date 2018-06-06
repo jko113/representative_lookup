@@ -1,5 +1,5 @@
 body {
-    color: rgb(230,245,247);
+    color: rgb(230, 245, 247);
 }
 
 .content-container {
@@ -25,6 +25,7 @@ body {
     font-family: 'Raleway', sans-serif;
     color: darkorange;
     font-size: 12px;
+    text-align: center;
 }
 
 .about-text p {
@@ -54,52 +55,57 @@ body {
 }
 
 .headshot-photo {
-    padding: 20px 0;
     max-height: 240px;
     border-radius: 50%;
     max-width: 177px;
+    width: 225px;
+    height: 225px;
+    border: 1px black solid;
+}
+
+.flipper:hover, .flipper:hover a img {
+    transform: rotateY(180deg);
+}
+
+.flipper {
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+    margin: 10px 0;
 }
 
 @media screen and (min-width: 360px) {
-
     .headshots-container {
         flex-direction: column;
     }
 }
 
 @media screen and (min-width: 500px) {
-
     .headshots-container {
         flex-direction: row;
         padding-top: 10px;
     }
-
     .headshot-photo {
         max-width: 300px;
     }
-
     .about-creators-alternate {
         display: none;
     }
-
     .about-creators {
         display: block;
     }
-
     .about-text h5 {
         text-align: left;
     }
-
-    .hamburger-container, .fa-bars {
+    .hamburger-container,
+    .fa-bars {
         display: none;
     }
-
     .link {
         width: 60px;
         font-size: 0.7rem;
         display: flex;
     }
-
     .link-github {
         font-size: .75em;
         width: 45px;
@@ -111,69 +117,56 @@ body {
     .content-container {
         flex-direction: row;
     }
-
     .headshots-container {
         flex-direction: column;
         justify-content: flex-start;
         padding-top: 25px;
     }
-
     .about-text {
         order: 0;
         padding-top: 35px;
     }
-
     .about-text h5 {
         text-align: center;
     }
-
     .headshot-photo {
         max-width: 177px;
     }
-
 }
 
 @media screen and (min-width: 1200px) {
     .hamburger-dropdown {
         display: none;
     }
-
     .hamburger-container,
     .fa-bars {
         display: none;
     }
-
     .link {
         width: 120px;
         font-size: 0.9rem;
         display: flex;
     }
-
     .link-github {
         font-size: 1em;
         width: 60px;
         display: flex;
     }
-
     .site-name {
         font-family: "Raleway", sans-serif;
         font-size: 40px;
     }
-
     .nav-bar {
         height: 60px;
     }
-
     .about-text h5 {
         text-align: left;
     }
-
     .headshots-container {
         flex-direction: row;
         justify-content: space-evenly;
         padding: 0;
     }
-
     .headshot-photo {
         max-width: 300px;
     }
