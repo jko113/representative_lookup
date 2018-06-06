@@ -27,10 +27,12 @@ var $joshImage = $(".josh");
 $(document).ready(function () {
     $stephenContainer.hover(function () {
         setTimeout(function () {
+            $('[data-stephen-flipper').css("transform","rotateY(180deg)");
             $stephenImage.attr("src", "images/github.png");
         }, 15);
     }, 
     function () {
+        $('[data-stephen-flipper').css("transform", "");
         setTimeout(function () {
             $stephenImage.attr("src", "images/stephen.jpg");
         }, 150);
@@ -39,10 +41,12 @@ $(document).ready(function () {
 $(document).ready(function () {
     $joshContainer.hover(function () {
         setTimeout(function () {
+            $('[data-josh-flipper').css("transform", "rotateY(180deg)");
             $joshImage.attr("src", "images/github.png");
         }, 15);
     }, 
     function () {
+        $('[data-josh-flipper').css("transform", "");
         setTimeout(function () {
             $joshImage.attr("src", "images/joshua_2.jpg");
         }, 150);
