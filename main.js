@@ -54,11 +54,6 @@ $addressForm.on("submit", function(event) {
         ajaxRequest
         .then(getDivisions)
         
-        // getDivisions();
-        //getOfficials();
-        // console.log($(".form-outer-container").offset().top)
-        // console.log($(".form-outer-container").outerHeight())
-        
         $('html, body').animate({
             scrollTop: $(".form-outer-container").outerHeight()
         }, 1000);
@@ -205,17 +200,6 @@ function getOfficialsByOffice(filteredOfficeArray) {
     return officials;
 }
 
-/*
-function isValidOffice (officeArray) {
-    var fullData = JSON.parse(localStorage.getItem("repInfo"));
-    // return Object.keys(fullData.offices).includes(officeArray.values());
-}
-*/
-
-// function loadAllOfficials () {
-
-// }
-
 function getOfficials (officialsArray) {
     // clear out officials from content area, if present
     clearOfficials();
@@ -356,20 +340,20 @@ function appendSocialMedia(currentOfficial, channels, index) {
 
     channels.forEach(function(channel) {
         var $newChannel = $("<div>");
+        $newChannel.addClass("channel-div");
         var $newChannelLink = $("<a>");
         var channelPrefix = "";
         if (channel["type"] === "Twitter") {
             channelPrefix = checkSocialType(channel);
-            $newChannelLink.text(channel["type"]);
             $newChannelLink.attr({href: channelPrefix, target: "_blank", overflow: "scroll"});
             $newChannelLink.attr("data-embeddedTwitter","");
             createTwitterListener($newChannelLink, channel["id"]);
         }
         else {
             channelPrefix = checkSocialType(channel);
-            $newChannelLink.text(channel["type"]);
             $newChannelLink.attr({href: channelPrefix, target: "_blank"});
         }
+        getIcon($newChannelLink, channel["type"]);
         $newChannel.append($newChannelLink);
         $socialContents.append($newChannel);
         $socialContainer.append($socialContents);
@@ -378,12 +362,31 @@ function appendSocialMedia(currentOfficial, channels, index) {
     currentOfficial.append($socialContainer);
 }
 
+function getIcon(link, type) {
+    
+    var $newIcon = $("<i>");
+    var newClass = "";
+    
+    if (type === "Facebook") {
+        newClass = "fab fa-facebook-square"; 
+    } else if (type === "YouTube") {
+        newClass = "fab fa-youtube-square";
+    } else if (type === "Twitter") {
+        newClass = "fab fa-twitter-square";
+    } else if (type === "GooglePlus") {
+        newClass = "fab fa-google-plus-square";
+    }
+
+    $newIcon.addClass(newClass);
+    link.append($newIcon);
+}
+
 function checkSocialType(channel) {
     if (channel["type"] === "Facebook") {
         return `https://facebook.com/` + channel["id"];
     }
     else if (channel["type"] === "YouTube") {
-        return `https://youtube.com/` + channel["id"];
+        return `https://youtube.com/channel/` + channel["id"];
     }
     else if (channel["type"] === "GooglePlus") {
         return `https://plus.google.com/` + channel["id"];
@@ -445,18 +448,6 @@ function addSocialListener(socialContainerLink, index) {
             $hiddenSocialDiv.removeClass("social-popup");
         }      
     });
-
-    // socialContainerLink.on("focusout", function(event) {
-    //     event.preventDefault();
-    //     var formatHiddenSocialDiv = "[data-social='" + index + "']"
-    //     var $hiddenSocialDiv = $(formatHiddenSocialDiv);
-
-    //     if (!$hiddenSocialDiv.hasClass("hidden")) {
-    //         $hiddenSocialDiv.addClass("hidden");
-    //         $hiddenSocialDiv.removeClass("social-popup");
-    //     } 
-    //     // console.log("focused out");
-    // });
 }
 
 function getTwitterHandle(currentOfficial, channels) {
@@ -543,14 +534,20 @@ function populateArticlePopup(index) {
     
     if (articles.length) {
 
+        var $availableArticles = $("<div>");
+        $availableArticles.addClass("available-articles");
+        $availableArticles.text("Available Articles");
+        $articlePopup.append($availableArticles);
+
         articles.forEach(function(article) {
-            $newArticle = $("<div>");
+            var $newArticle = $("<div>");
+            $newArticle.addClass("article-div");
             var $newArticleLink = $("<a>");
             $newArticleLink.attr({href: article["web_url"], target: "_blank"});
     
-            var headline = article["headline"]["main"]
-            if (headline.length > 25) {
-                headline = headline.slice(0,25) + "...";
+            var headline = "‣ " + article["headline"]["main"]
+            if (headline.length > 35) {
+                headline = headline.slice(0,35) + "..";
             }
             $newArticleLink.text(headline);
             $articlePopup.append($newArticle);
@@ -575,7 +572,6 @@ function putX(popup, X) {
 function addXListener(X) {
     X.on("click", function(event) {
         event.preventDefault();
-        // console.log("clicked X");
         if (X.hasClass("social")) {
             hideSocialPopup();
         } else if (X.hasClass("times")) {
@@ -657,7 +653,6 @@ function prependPhoto(currentOfficial, item) {
             }
         });
         $imageUrl.attr("href", "https://www.google.com/search?tbm=isch&q=" + formattedName);
-        // $image.attr("src", "images/no-image-available.jpg");
         $image.attr("src", "images/No_image_2.gif");
         $imageContainer.append($imageUrl);
         $imageContainer.addClass("official-imageUrl-container");
@@ -700,7 +695,7 @@ function loadPage () {
 }
 
 // loadPage();
-// // loadAllOfficials();
+
 $clear.on("click", function() {
     clearOfficials();
     clearDivisions();

@@ -28,7 +28,7 @@ body {
 
 
 .nav-bar, .footer {
-    font-family: "Fjalla One", sans-serif;
+    font-family: "Raleway", sans-serif;
     min-width: 360px;
     display: flex;
     position: relative;
@@ -60,6 +60,7 @@ body {
 }
 
 .site-name {
+    font-family: 'Raleway', sans-serif;
     text-align: center;
     padding: 10px;
     color: rgb(230,245,247);
@@ -185,7 +186,7 @@ body {
 }
 
 .welcome-text-container {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Raleway', sans-serif;
     min-width: 320px;
     background-color: rgba(51,51,51,0.7);
     color: rgb(230,245,247);
@@ -333,7 +334,20 @@ label {
     background: lightgray;
     color: rgb(28,28,28);
     padding: 0 20px 15px 20px;
-    /* overflow: scroll; */
+}
+
+.social-popup a {
+    font-size: 16px;
+}
+
+.available-articles {
+    font-family: "Raleway", sans-serif;
+    font-size: 24px;
+    color: rgb(28,28,28);
+}
+
+.channel-div, .article-div {
+    padding: 10px 0;
 }
 
 .close-box {
@@ -474,7 +488,7 @@ label {
 
     .site-name {
         font-size: 25px;
-        margin-left: 30px;
+        margin-left: 15px;
     }
 
     .nav-bar {

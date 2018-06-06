@@ -9,7 +9,7 @@ body {
 }
 
 .about-text {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Raleway', sans-serif;
     order: 1;
     padding-top: 25px;
     flex: 60%;
@@ -22,7 +22,7 @@ body {
 }
 
 .name {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Raleway', sans-serif;
     color: darkorange;
     font-size: 12px;
 }
@@ -156,6 +156,7 @@ body {
     }
 
     .site-name {
+        font-family: "Raleway", sans-serif;
         font-size: 40px;
     }
 
