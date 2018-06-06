@@ -4,13 +4,13 @@
 
 RepSearch is an application for obtaining information about elected officials in a given constituency. After entering a physical U.S. address, government officials at the local, state and national levels appear on-screen, complete with a photo (if available) and details about rank, party affiliation, associated website and news articles, as well as social media presence.
 
-[![Main functionality](https://raw.githubusercontent.com/jko113/repsearch/master/images/main.gif)](https://www.youtube.com/watch?v=-3jyz42O0Kk)
+[![Main functionality](https://raw.githubusercontent.com/jko113/repsearch/master/images/main.gif)](https://youtu.be/MFqUMrHXWvw)
 <br>
-[![Responsiveness](https://raw.githubusercontent.com/jko113/repsearch/master/images/responsiveness.gif)](https://www.youtube.com/watch?v=-3jyz42O0Kk)
+[![Responsiveness](https://raw.githubusercontent.com/jko113/repsearch/master/images/responsiveness.gif)](https://www.youtube.com/watch?v=MFqUMrHXWvw)
 <br>
-[![Social Media](https://raw.githubusercontent.com/jko113/repsearch/master/images/social-media.gif)](https://www.youtube.com/watch?v=-3jyz42O0Kk)
+[![Social Media](https://raw.githubusercontent.com/jko113/repsearch/master/images/social-media.gif)](https://www.youtube.com/watch?v=MFqUMrHXWvw)
 
-<a href="https://www.youtube.com/watch?v=-3jyz42O0Kk" target="blank">Click here for the full RepSearch demo!</a>
+<a href="https://www.youtube.com/watch?v=MFqUMrHXWvw" target="blank">Click here for the full RepSearch demo!</a>
 
 ## Technologies
 
