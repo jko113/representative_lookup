@@ -55,9 +55,9 @@ body {
 
 .headshot-photo {
     padding: 20px 0;
-    max-height: 240px;
+    max-height: 255px;
     border-radius: 50%;
-    max-width: 177px;
+    max-width: 255px;
 }
 
 @media screen and (min-width: 360px) {
@@ -72,10 +72,6 @@ body {
     .headshots-container {
         flex-direction: row;
         padding-top: 10px;
-    }
-
-    .headshot-photo {
-        max-width: 300px;
     }
 
     .about-creators-alternate {
@@ -126,11 +122,6 @@ body {
     .about-text h5 {
         text-align: center;
     }
-
-    .headshot-photo {
-        max-width: 177px;
-    }
-
 }
 
 @media screen and (min-width: 1200px) {
@@ -170,11 +161,7 @@ body {
 
     .headshots-container {
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: space-around;
         padding: 0;
-    }
-
-    .headshot-photo {
-        max-width: 300px;
     }
 }
