@@ -59,10 +59,11 @@ body {
     max-height: 225px;
     border-radius: 50%;
     max-width: 225px;
+    /* margin: 20px 0; */
 }
 
 .flipper:hover, .flipper:hover a img {
-    transform: rotateY(180deg);
+    /* transform: rotateY(180deg); */
 }
 
 .flipper {
