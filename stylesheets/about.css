@@ -55,12 +55,10 @@ body {
 }
 
 .headshot-photo {
-    max-height: 240px;
-    border-radius: 50%;
-    max-width: 177px;
-    width: 225px;
-    height: 225px;
     border: 1px black solid;
+    max-height: 255px;
+    border-radius: 50%;
+    max-width: 255px;
 }
 
 .flipper:hover, .flipper:hover a img {
@@ -84,9 +82,6 @@ body {
     .headshots-container {
         flex-direction: row;
         padding-top: 10px;
-    }
-    .headshot-photo {
-        max-width: 300px;
     }
     .about-creators-alternate {
         display: none;
@@ -129,9 +124,6 @@ body {
     .about-text h5 {
         text-align: center;
     }
-    .headshot-photo {
-        max-width: 177px;
-    }
 }
 
 @media screen and (min-width: 1200px) {
@@ -164,10 +156,7 @@ body {
     }
     .headshots-container {
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: space-around;
         padding: 0;
-    }
-    .headshot-photo {
-        max-width: 300px;
     }
 }
