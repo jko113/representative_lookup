@@ -19,6 +19,34 @@ var $dataDiv = $("[data-show]");
 var $hamburgerIcon = $("[data-hamburger-icon]");
 var $hamburgerDropdown = $("[data-hamburger-dropdown]");
 var $clear = $("[data-clear]");
+var $stephenContainer = $("[data-stephen")
+var $joshContainer = $("[data-josh")
+var $stephenImage = $(".stephen");
+var $joshImage = $(".josh");
+
+$(document).ready(function () {
+    $stephenContainer.hover(function () {
+        setTimeout(function () {
+            $stephenImage.attr("src", "images/github.png");
+        }, 15);
+    }, 
+    function () {
+        setTimeout(function () {
+            $stephenImage.attr("src", "images/stephen.jpg");
+        }, 150);
+    })});
+
+$(document).ready(function () {
+    $joshContainer.hover(function () {
+        setTimeout(function () {
+            $joshImage.attr("src", "images/github.png");
+        }, 15);
+    }, 
+    function () {
+        setTimeout(function () {
+            $joshImage.attr("src", "images/joshua_2.jpg");
+        }, 150);
+    })});
 
 //form validation custom message for state
 // var cityForm = document.querySelector("[data-input=`city`");
