@@ -69,7 +69,7 @@ After working intensively on the project for several days, the code base kept gr
 
 The first method ensured that variables followed the precise nomenclature rules we established during the course of development. For instance, all JQuery variables were named beginning with a "$" character to ensure they weren't treated as standard JavaScript objects. Also, we included descriptive action verbs when defining functions, such as the above logically-grouped series `getOffices()`, `getOfficialsByOffice`, and `getOfficials()`.
 
-The second method involved hammering out the most focused functions we could possibly devise. Whenever we encountered a situation of copying and pasting code, we opted instead to refactor the code into a separate, more generic function. This increased the readibility, integrity, and reusability of the code.
+The second method involved hammering out the most focused functions we could possibly devise. Whenever we encountered a situation of copying and pasting code, we opted instead to refactor the code into a separate, more generic function. This increased the readability, integrity, and reusability of the code.
 
 ### Understanding Promises and Callbacks
 
